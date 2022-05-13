@@ -2,7 +2,6 @@ package by.nikita.data.cards;
 
 public enum CardValue {
     V_A("A"),
-    V_1("1"),
     V_2("2"),
     V_3("3"),
     V_4("4"),
@@ -16,7 +15,7 @@ public enum CardValue {
     V_Q("Q"),
     V_K("K");
 
-    private String symbol;
+    private final String symbol;
 
     CardValue(String symbol) {
         this.symbol = symbol;

@@ -6,7 +6,7 @@ public enum CardSuit {
     HEARTS("♥"),
     DIAMONDS("♦");
 
-    private String symbol;
+    private final String symbol;
 
     CardSuit(String symbol) {
         this.symbol = symbol;
