@@ -113,29 +113,40 @@ public class CarltonSolitaireCardTableImpl implements CarltonSolitaireCardTable 
      */
     @Override
     public List<Card> takeCardsFromReserveDeck(int numberOfCardsToTake) throws IllegalArgumentException {
-        if (numberOfCardsToTake <= 0) {
-            throw new IllegalArgumentException("Illegal number of cards: " + numberOfCardsToTake);
-        }
+        validateNumberOfCards(numberOfCardsToTake);
+
         List<Card> takenCards = new ArrayList<>(numberOfCardsToTake);
         for (int i = 0; reserveDeck.size() > 0 && i < numberOfCardsToTake; i++) {
             takenCards.add(reserveDeck.pop());
         }
+
         return takenCards;
     }
 
     @Override
     public List<Card> takeCardsFromDeck(int deckNumber, int numberOfCardsToTake) throws IllegalArgumentException {
-        if (deckNumber < 0 || deckNumber > NUMBER_OF_DECKS) {
-            throw new IllegalArgumentException("Illegal deck number: " + deckNumber);
-        }
-        if (numberOfCardsToTake <= 0) {
-            throw new IllegalArgumentException("Illegal number of cards: " + numberOfCardsToTake);
-        }
+        validateDeckNumber(deckNumber);
+        validateNumberOfCards(numberOfCardsToTake);
+
         List<Card> takenCards = new ArrayList<>(numberOfCardsToTake);
         Stack<Card> deck = decks.get(deckNumber);
         for (int i = 0; deck.size() > 0 && i < numberOfCardsToTake; i++) {
             takenCards.add(deck.pop());
         }
+        return takenCards;
+    }
+
+    @Override
+    public List<Card> takeCardsFromResultDeck(int deckNumber, int numberOfCardsToTake) throws IllegalArgumentException {
+        validateDeckNumber(deckNumber);
+        validateNumberOfCards(numberOfCardsToTake);
+
+        List<Card> takenCards = new ArrayList<>(numberOfCardsToTake);
+        Stack<Card> deck = resultDecks.get(deckNumber);
+        for (int i = 0; deck.size() > 0 && i < numberOfCardsToTake; i++) {
+            takenCards.add(deck.pop());
+        }
+
         return takenCards;
     }
 
@@ -147,11 +158,28 @@ public class CarltonSolitaireCardTableImpl implements CarltonSolitaireCardTable 
 
     @Override
     public void putCardsToDeck(int deckNumber, Collection<Card> cards) throws IllegalArgumentException {
+        validateDeckNumber(deckNumber);
+        requireNonNull(cards);
+        decks.get(deckNumber).addAll(cards);
+    }
+
+    @Override
+    public void putCardsToResultDeck(int deckNumber, Collection<Card> cards) throws IllegalArgumentException {
+        validateDeckNumber(deckNumber);
+        requireNonNull(cards);
+        resultDecks.get(deckNumber).addAll(cards);
+    }
+
+    private void validateNumberOfCards(int numberOfCards) throws IllegalArgumentException {
+        if (numberOfCards <= 0) {
+            throw new IllegalArgumentException("Illegal number of cards: " + numberOfCards);
+        }
+    }
+
+    private void validateDeckNumber(int deckNumber) throws IllegalArgumentException {
         if (deckNumber < 0 || deckNumber > NUMBER_OF_DECKS) {
             throw new IllegalArgumentException("Illegal deck number: " + deckNumber);
         }
-        requireNonNull(cards);
-        decks.get(deckNumber).addAll(cards);
     }
 
     private List<Card> shuffleDeck(Collection<Card> deck) {
