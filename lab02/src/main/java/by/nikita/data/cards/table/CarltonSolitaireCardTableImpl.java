@@ -13,7 +13,7 @@ public class CarltonSolitaireCardTableImpl implements CarltonSolitaireCardTable 
 
     private final static int NUMBER_OF_DECKS = 4;
 
-    private final static String CARD_STRING_PLACEHOLDER = "          ";
+    private final static String WHITESPACE = "          ";
 
     private final static String RESULT_DECK_CARD_STRING_PLACEHOLDER = "__________";
 
@@ -68,7 +68,9 @@ public class CarltonSolitaireCardTableImpl implements CarltonSolitaireCardTable 
                     System.out.printf("%1$12s",
                             (cardIterator.hasNext())
                                     ? cardToString(cardIterator.next())
-                                    : RESULT_DECK_CARD_STRING_PLACEHOLDER);
+                                    : (row == 0)
+                                            ? RESULT_DECK_CARD_STRING_PLACEHOLDER
+                                            : WHITESPACE);
                 }
                 System.out.println();
             }
@@ -87,7 +89,7 @@ public class CarltonSolitaireCardTableImpl implements CarltonSolitaireCardTable 
                     System.out.printf("%1$12s",
                             (cardIterator.hasNext())
                                     ? cardToString(cardIterator.next())
-                                    : CARD_STRING_PLACEHOLDER);
+                                    : WHITESPACE);
                 }
                 System.out.println();
             }
