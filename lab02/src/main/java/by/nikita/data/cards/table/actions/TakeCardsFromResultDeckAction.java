@@ -5,7 +5,7 @@ import by.nikita.data.cards.table.CarltonSolitaireCardTable;
 
 import java.util.List;
 
-public class TakeCardsFromResultDeckAction implements Action {
+public class TakeCardsFromResultDeckAction implements TakeAction {
 
     private CarltonSolitaireCardTable carltonSolitaireCardTable;
 
@@ -33,5 +33,10 @@ public class TakeCardsFromResultDeckAction implements Action {
     public void undo() {
         carltonSolitaireCardTable.putCardsToResultDeck(deckNumber, takenCards);
         System.out.println(numberOfCardsToTake + " cards put");
+    }
+
+    @Override
+    public List<Card> getTaken() {
+        return takenCards;
     }
 }

@@ -7,7 +7,7 @@ import java.util.List;
 
 import static java.util.Objects.requireNonNull;
 
-public class TakeCardsFromReserveAction implements Action {
+public class TakeCardsFromReserveAction implements TakeAction {
 
     private CarltonSolitaireCardTable carltonSolitaireCardTable;
 
@@ -37,5 +37,10 @@ public class TakeCardsFromReserveAction implements Action {
     public void undo() {
         carltonSolitaireCardTable.putCardsToReserveDeck(takenCards);
         System.out.println(numberOfCardsToTake + " cards put");
+    }
+
+    @Override
+    public List<Card> getTaken() {
+        return takenCards;
     }
 }
