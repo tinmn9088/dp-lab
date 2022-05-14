@@ -1,10 +1,8 @@
 package by.nikita.data.cards.table.controllers;
 
 import by.nikita.data.cards.table.CarltonSolitaireCardTable;
-import by.nikita.data.cards.table.controllers.filters.SyntaxProcessException;
-import by.nikita.data.cards.table.controllers.filters.TakeCardsActionProcessor;
-import by.nikita.data.cards.table.controllers.filters.TakeCardsFromReserveActionProcessor;
-import by.nikita.data.cards.table.controllers.filters.UserInputProcessor;
+import by.nikita.data.cards.table.actions.TakeCardsFromResultDeckAction;
+import by.nikita.data.cards.table.controllers.filters.*;
 
 import static java.util.Objects.requireNonNull;
 
@@ -17,10 +15,15 @@ public class CarltonSolitaireControllerImpl implements CarltonSolitaireControlle
     public CarltonSolitaireControllerImpl(CarltonSolitaireCardTable carltonSolitaireCardTable) {
         this.carltonSolitaireCardTable = requireNonNull(carltonSolitaireCardTable);
 
-        TakeCardsActionProcessor takeCardsActionProcessor = new TakeCardsActionProcessor(carltonSolitaireCardTable);
-        TakeCardsFromReserveActionProcessor takeCardsFromReserveActionProcessor = new TakeCardsFromReserveActionProcessor(carltonSolitaireCardTable);
+        TakeCardsActionProcessor takeCardsActionProcessor =
+                new TakeCardsActionProcessor(carltonSolitaireCardTable);
+        TakeCardsFromReserveActionProcessor takeCardsFromReserveActionProcessor =
+                new TakeCardsFromReserveActionProcessor(carltonSolitaireCardTable);
+        TakeCardsFromResultDeckActionProcessor takeCardsFromResultDeckActionProcessor =
+                new TakeCardsFromResultDeckActionProcessor(carltonSolitaireCardTable);
 
         takeCardsActionProcessor.setNext(takeCardsFromReserveActionProcessor);
+        takeCardsFromReserveActionProcessor.setNext(takeCardsFromResultDeckActionProcessor);
 
         this.processor = takeCardsActionProcessor;
     }
