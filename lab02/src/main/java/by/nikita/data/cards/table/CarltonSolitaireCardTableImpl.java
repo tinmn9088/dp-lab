@@ -94,14 +94,15 @@ public class CarltonSolitaireCardTableImpl implements CarltonSolitaireCardTable 
         }
     }
 
-    // TODO: implement
     @Override
     public void perform(Action action) {
+        action.perform();
+        history.add(action);
     }
 
-    // TODO: implement
     @Override
     public void undoLast() {
+        history.pop().undo();
     }
 
     private List<Card> shuffleDeck(Collection<Card> deck) {
