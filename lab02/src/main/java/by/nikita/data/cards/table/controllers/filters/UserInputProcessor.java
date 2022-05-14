@@ -20,7 +20,19 @@ public abstract class UserInputProcessor {
         return next;
     }
 
+    public CarltonSolitaireCardTable getCarltonSolitaireCardTable() {
+        return carltonSolitaireCardTable;
+    }
+
     public void setNext(UserInputProcessor next) {
         this.next = requireNonNull(next);
+    }
+
+    protected void handleSyntaxError(String userInput) throws SyntaxProcessException {
+        if (getNext() != null) {
+            getNext().process(userInput);
+        } else {
+            throw new SyntaxProcessException(String.format("Syntax error in \"%s\"", userInput));
+        }
     }
 }
