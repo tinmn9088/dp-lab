@@ -7,6 +7,7 @@ import java.util.*;
 
 import static java.util.Collections.*;
 import static java.util.Comparator.comparingInt;
+import static java.util.Objects.requireNonNull;
 
 public class CarltonSolitaireCardTableImpl implements CarltonSolitaireCardTable {
 
@@ -103,6 +104,29 @@ public class CarltonSolitaireCardTableImpl implements CarltonSolitaireCardTable 
     @Override
     public void undoLast() {
         history.pop().undo();
+    }
+
+    /**
+     * @param numberOfCardsToTake positive number
+     * @return list of cards with size <= to number of cards to take
+     * @throws IllegalArgumentException if number of cards to take is non-positive
+     */
+    @Override
+    public List<Card> takeCardsFromReserveDeck(int numberOfCardsToTake) throws IllegalArgumentException {
+        if (numberOfCardsToTake <= 0) {
+            throw new IllegalArgumentException("Illegal number of cards: " + numberOfCardsToTake);
+        }
+        List<Card> takenCards = new ArrayList<>(numberOfCardsToTake);
+        for (int i = 0; reserveDeck.size() > 0 && i < numberOfCardsToTake; i++) {
+            takenCards.add(reserveDeck.pop());
+        }
+        return takenCards;
+    }
+
+    @Override
+    public void putCardsToReserveDeck(Collection<Card> cards) {
+        requireNonNull(cards);
+        reserveDeck.addAll(cards);
     }
 
     private List<Card> shuffleDeck(Collection<Card> deck) {
