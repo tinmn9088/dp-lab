@@ -3,7 +3,7 @@ package by.nikita.data.cards.table.actions;
 import by.nikita.data.cards.Card;
 import by.nikita.data.cards.table.CarltonSolitaireCardTable;
 
-import java.util.Collection;
+import java.util.List;
 
 import static java.util.Objects.requireNonNull;
 
@@ -13,10 +13,10 @@ public class PutCardsToResultDeckAction implements Action {
 
     private int deckNumber;
 
-    private Collection<Card> takenCards;
+    private List<Card> takenCards;
 
     public PutCardsToResultDeckAction(CarltonSolitaireCardTable carltonSolitaireCardTable, int deckNumber,
-                                      Collection<Card> takenCards) {
+                                      List<Card> takenCards) {
         this.carltonSolitaireCardTable = carltonSolitaireCardTable;
         this.deckNumber = deckNumber;
         this.takenCards = requireNonNull(takenCards);

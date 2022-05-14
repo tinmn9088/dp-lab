@@ -3,7 +3,6 @@ package by.nikita.data.cards.table;
 import by.nikita.data.cards.Card;
 import by.nikita.data.cards.table.actions.Action;
 
-import java.util.Collection;
 import java.util.List;
 
 public interface CarltonSolitaireCardTable extends SolitaireCardTable {
@@ -18,9 +17,9 @@ public interface CarltonSolitaireCardTable extends SolitaireCardTable {
 
     List<Card> takeCardsFromResultDeck(int deckNumber, int numberOfCardsToTake);
 
-    void putCardsToReserveDeck(Collection<Card> cards);
+    void putCardsToReserveDeck(List<Card> cards);
 
-    void putCardsToDeck(int deckNumber, Collection<Card> cards);
+    void putCardsToDeck(int deckNumber, List<Card> cards);
 
-    void putCardsToResultDeck(int deckNumber, Collection<Card> cards);
+    void putCardsToResultDeck(int deckNumber, List<Card> cards);
 }

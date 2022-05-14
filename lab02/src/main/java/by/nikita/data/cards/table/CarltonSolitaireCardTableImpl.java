@@ -153,20 +153,20 @@ public class CarltonSolitaireCardTableImpl implements CarltonSolitaireCardTable 
     }
 
     @Override
-    public void putCardsToReserveDeck(Collection<Card> cards) {
+    public void putCardsToReserveDeck(List<Card> cards) {
         requireNonNull(cards);
         reserveDeck.addAll(cards);
     }
 
     @Override
-    public void putCardsToDeck(int deckNumber, Collection<Card> cards) throws IllegalArgumentException {
+    public void putCardsToDeck(int deckNumber, List<Card> cards) throws IllegalArgumentException {
         validateDeckNumber(deckNumber);
         requireNonNull(cards);
         decks.get(deckNumber).addAll(cards);
     }
 
     @Override
-    public void putCardsToResultDeck(int deckNumber, Collection<Card> cards) throws IllegalArgumentException {
+    public void putCardsToResultDeck(int deckNumber, List<Card> cards) throws IllegalArgumentException {
         validateDeckNumber(deckNumber);
         requireNonNull(cards);
         resultDecks.get(deckNumber).addAll(cards);
