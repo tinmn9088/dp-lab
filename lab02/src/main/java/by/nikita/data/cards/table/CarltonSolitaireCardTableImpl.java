@@ -1,6 +1,7 @@
 package by.nikita.data.cards.table;
 
 import by.nikita.data.cards.Card;
+import by.nikita.data.cards.CardSuit;
 import by.nikita.data.cards.table.actions.Action;
 
 import java.util.*;
@@ -13,9 +14,15 @@ public class CarltonSolitaireCardTableImpl implements CarltonSolitaireCardTable 
 
     private final static int NUMBER_OF_DECKS = 4;
 
-    private final static String WHITESPACE = "          ";
+    private final static String WHITESPACE = "        ";
 
-    private final static String RESULT_DECK_CARD_STRING_PLACEHOLDER = "__________";
+    private final static String RESULT_DECK_CARD_STRING_PLACEHOLDER = "________";
+
+    private final static String ANSI_RED = "\u001B[31m";
+
+    private final static String ANSI_BLACK = "\u001B[30m";
+
+    private final static String ANSI_RESET = "\u001B[0m";
 
     private List<Stack<Card>> resultDecks = new ArrayList<>(NUMBER_OF_DECKS);
 
@@ -65,7 +72,7 @@ public class CarltonSolitaireCardTableImpl implements CarltonSolitaireCardTable 
                     System.out.print("               ");
                 }
                 for (Iterator<Card> cardIterator : resultDecksIterators) {
-                    System.out.printf("%1$12s",
+                    System.out.printf("%s  ",
                             (cardIterator.hasNext())
                                     ? cardToString(cardIterator.next())
                                     : (row == 0)
@@ -86,7 +93,7 @@ public class CarltonSolitaireCardTableImpl implements CarltonSolitaireCardTable 
             for (int row = 0; row < decksHeight; row++) {
                 System.out.print("               ");
                 for (Iterator<Card> cardIterator : decksIterators) {
-                    System.out.printf("%1$12s",
+                    System.out.printf("%s  ",
                             (cardIterator.hasNext())
                                     ? cardToString(cardIterator.next())
                                     : WHITESPACE);
@@ -191,7 +198,9 @@ public class CarltonSolitaireCardTableImpl implements CarltonSolitaireCardTable 
     }
 
     private String cardToString(Card card) {
-        return String.format("[%1$1s %2$4s]", card.getCardSuit().getSymbol(), card.getCardValue().getSymbol());
+        boolean isRed = card.getCardSuit() == CardSuit.HEARTS || card.getCardSuit() == CardSuit.DIAMONDS;
+        return String.format("[%s%1s %4s%s]", (isRed) ? ANSI_RED : ANSI_BLACK,
+                card.getCardSuit().getSymbol(), card.getCardValue().getSymbol(), ANSI_RESET);
     }
 
     private int getResultDecksHeight() {
