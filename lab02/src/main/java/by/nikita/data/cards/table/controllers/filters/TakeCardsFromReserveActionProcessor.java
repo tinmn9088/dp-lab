@@ -15,7 +15,8 @@ public class TakeCardsFromReserveActionProcessor extends UserInputProcessor {
 
     @Override
     public void process(String userInput) {
-        if (userInput.matches("take from reserve deck")) {
+        userInput = userInput.strip();
+        if (userInput.matches("take\\s+from\\s+reserve\\s+deck")) {
             Action action = new TakeCardsFromReserveAction(getCarltonSolitaireCardTable(), 1);
             getCarltonSolitaireCardTable().perform(action);
         } else {
