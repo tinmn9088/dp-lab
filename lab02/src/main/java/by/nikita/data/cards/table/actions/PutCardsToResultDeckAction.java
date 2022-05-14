@@ -7,7 +7,7 @@ import java.util.Collection;
 
 import static java.util.Objects.requireNonNull;
 
-public class PutCardsAction implements Action {
+public class PutCardsToResultDeckAction implements Action {
 
     private CarltonSolitaireCardTable carltonSolitaireCardTable;
 
@@ -15,8 +15,8 @@ public class PutCardsAction implements Action {
 
     private Collection<Card> takenCards;
 
-    public PutCardsAction(CarltonSolitaireCardTable carltonSolitaireCardTable, int deckNumber,
-                          Collection<Card> takenCards) {
+    public PutCardsToResultDeckAction(CarltonSolitaireCardTable carltonSolitaireCardTable, int deckNumber,
+                                      Collection<Card> takenCards) {
         this.carltonSolitaireCardTable = carltonSolitaireCardTable;
         this.deckNumber = deckNumber;
         this.takenCards = requireNonNull(takenCards);
@@ -24,13 +24,13 @@ public class PutCardsAction implements Action {
 
     @Override
     public void perform() {
-        carltonSolitaireCardTable.putCardsToDeck(deckNumber, takenCards);
-        System.out.println("Cards put in deck " + deckNumber);
+        carltonSolitaireCardTable.putCardsToResultDeck(deckNumber, takenCards);
+        System.out.println("Cards put in result deck " + deckNumber);
     }
 
     @Override
     public void undo() {
-        carltonSolitaireCardTable.takeCardsFromDeck(deckNumber, takenCards.size());
-        System.out.println("Cards taken from deck " + deckNumber);
+        carltonSolitaireCardTable.takeCardsFromResultDeck(deckNumber, takenCards.size());
+        System.out.println("Cards taken from result deck " + deckNumber);
     }
 }
