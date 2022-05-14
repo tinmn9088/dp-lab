@@ -30,13 +30,13 @@ public class TakeCardsFromReserveAction implements TakeAction {
     @Override
     public void perform() {
         takenCards = carltonSolitaireCardTable.takeCardsFromReserveDeck(numberOfCardsToTake);
-        System.out.println(numberOfCardsToTake + " cards taken");
+        System.out.println(takenCards.size() + " cards taken");
     }
 
     @Override
     public void undo() {
         carltonSolitaireCardTable.putCardsToReserveDeck(takenCards);
-        System.out.println(numberOfCardsToTake + " cards put");
+        System.out.println(takenCards.size() + " cards put");
     }
 
     @Override

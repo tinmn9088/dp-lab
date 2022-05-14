@@ -26,13 +26,13 @@ public class TakeCardsFromResultDeckAction implements TakeAction {
     @Override
     public void perform() {
         takenCards = carltonSolitaireCardTable.takeCardsFromResultDeck(deckNumber, numberOfCardsToTake);
-        System.out.println(numberOfCardsToTake + " cards taken");
+        System.out.println(takenCards.size() + " cards taken");
     }
 
     @Override
     public void undo() {
         carltonSolitaireCardTable.putCardsToResultDeck(deckNumber, takenCards);
-        System.out.println(numberOfCardsToTake + " cards put");
+        System.out.println(takenCards.size() + " cards put");
     }
 
     @Override
