@@ -5,7 +5,7 @@ import by.nikita.data.cards.table.CarltonSolitaireCardTable;
 
 import java.util.List;
 
-public class TakeCardsFromResultDeckAction implements TakeAction {
+public class TakeCardsFromResultDeckAction implements TakeListAction {
 
     private CarltonSolitaireCardTable carltonSolitaireCardTable;
 

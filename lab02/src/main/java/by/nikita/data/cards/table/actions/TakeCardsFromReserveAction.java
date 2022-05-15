@@ -7,7 +7,7 @@ import java.util.List;
 
 import static java.util.Objects.requireNonNull;
 
-public class TakeCardsFromReserveAction implements TakeAction {
+public class TakeCardsFromReserveAction implements TakeListAction {
 
     private CarltonSolitaireCardTable carltonSolitaireCardTable;
 
