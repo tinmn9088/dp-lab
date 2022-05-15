@@ -4,12 +4,15 @@ import by.nikita.data.cards.Card;
 import by.nikita.data.cards.table.actions.Action;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface CarltonSolitaireCardTable extends SolitaireCardTable {
 
     void perform(Action action);
 
     void undoLast();
+
+    Optional<Action> getLastActionPerformed();
 
     List<Card> takeCardsFromReserveDeck(int numberOfCardsToTake);
 

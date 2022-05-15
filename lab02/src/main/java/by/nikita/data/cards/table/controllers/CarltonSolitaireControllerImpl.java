@@ -21,9 +21,12 @@ public class CarltonSolitaireControllerImpl implements CarltonSolitaireControlle
                 new TakeCardsFromReserveActionProcessor(carltonSolitaireCardTable);
         TakeCardsFromResultDeckActionProcessor takeCardsFromResultDeckActionProcessor =
                 new TakeCardsFromResultDeckActionProcessor(carltonSolitaireCardTable);
+        PutCardsActionProcessor putCardsActionProcessor =
+                new PutCardsActionProcessor(carltonSolitaireCardTable);
 
         takeCardsActionProcessor.setNext(takeCardsFromReserveActionProcessor);
         takeCardsFromReserveActionProcessor.setNext(takeCardsFromResultDeckActionProcessor);
+        takeCardsFromResultDeckActionProcessor.setNext(putCardsActionProcessor);
 
         this.processor = takeCardsActionProcessor;
     }

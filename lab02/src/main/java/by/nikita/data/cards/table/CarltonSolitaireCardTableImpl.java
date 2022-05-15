@@ -115,6 +115,14 @@ public class CarltonSolitaireCardTableImpl implements CarltonSolitaireCardTable 
         history.pop().undo();
     }
 
+    @Override
+    public Optional<Action> getLastActionPerformed() {
+        if (history.size() < 1) {
+            return Optional.empty();
+        }
+        return Optional.of(history.peek());
+    }
+
     /**
      * @param numberOfCardsToTake positive number
      * @return list of cards with size <= to number of cards to take
