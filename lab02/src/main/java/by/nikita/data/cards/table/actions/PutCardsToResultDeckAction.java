@@ -25,12 +25,12 @@ public class PutCardsToResultDeckAction implements Action {
     @Override
     public void perform() {
         carltonSolitaireCardTable.putCardsToResultDeck(deckNumber, takenCards);
-        System.out.println("Cards put in result deck " + deckNumber);
+        System.out.println("Cards put in result deck " + (deckNumber + 1));
     }
 
     @Override
     public void undo() {
         carltonSolitaireCardTable.takeCardsFromResultDeck(deckNumber, takenCards.size());
-        System.out.println("Cards taken from result deck " + deckNumber);
+        System.out.println("Cards taken from result deck " + (deckNumber + 1));
     }
 }
