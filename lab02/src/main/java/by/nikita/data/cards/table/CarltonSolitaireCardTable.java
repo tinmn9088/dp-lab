@@ -12,6 +12,8 @@ public interface CarltonSolitaireCardTable extends SolitaireCardTable {
 
     void undoLast();
 
+    void setValidated(boolean validated);
+
     Optional<Action> getLastActionPerformed();
 
     List<Card> takeCardsFromReserveDeck(int numberOfCardsToTake);

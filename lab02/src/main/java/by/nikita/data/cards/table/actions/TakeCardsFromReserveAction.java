@@ -37,7 +37,9 @@ public class TakeCardsFromReserveAction implements TakeListAction {
     @Override
     public void undo() {
         reverse(takenCards);
+        carltonSolitaireCardTable.setValidated(false);
         carltonSolitaireCardTable.putCardsToReserveDeck(takenCards);
+        carltonSolitaireCardTable.setValidated(true);
         takenCards.clear();
         System.out.println(takenCards.size() + " cards put");
     }

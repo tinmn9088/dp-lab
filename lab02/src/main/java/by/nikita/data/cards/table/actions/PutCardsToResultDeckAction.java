@@ -30,7 +30,9 @@ public class PutCardsToResultDeckAction implements Action {
 
     @Override
     public void undo() {
+        carltonSolitaireCardTable.setValidated(false);
         carltonSolitaireCardTable.takeCardsFromResultDeck(deckNumber, takenCards.size());
+        carltonSolitaireCardTable.setValidated(true);
         System.out.println("Cards taken from result deck " + (deckNumber + 1));
     }
 }

@@ -34,7 +34,9 @@ public class TakeCardsAction implements TakeListAction {
     @Override
     public void undo() {
         reverse(takenCards);
+        carltonSolitaireCardTable.setValidated(false);
         carltonSolitaireCardTable.putCardsToDeck(deckNumber, takenCards);
+        carltonSolitaireCardTable.setValidated(true);
         takenCards.clear();
         System.out.println(takenCards.size() + " cards put");
     }

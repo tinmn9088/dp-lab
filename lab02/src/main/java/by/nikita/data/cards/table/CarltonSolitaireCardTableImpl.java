@@ -2,10 +2,12 @@ package by.nikita.data.cards.table;
 
 import by.nikita.data.cards.Card;
 import by.nikita.data.cards.CardSuit;
+import by.nikita.data.cards.CardValue;
 import by.nikita.data.cards.table.actions.Action;
 
 import java.util.*;
 
+import static java.lang.String.format;
 import static java.util.Collections.*;
 import static java.util.Comparator.comparingInt;
 import static java.util.Objects.requireNonNull;
@@ -31,6 +33,8 @@ public class CarltonSolitaireCardTableImpl implements CarltonSolitaireCardTable 
     private Stack<Card> reserveDeck = new Stack<>();
 
     private Stack<Action> history = new Stack<>();
+
+    private boolean validated = false;
 
     public CarltonSolitaireCardTableImpl(Collection<Card> cards) {
         for (int i = 0; i < NUMBER_OF_DECKS; i++) {
@@ -116,6 +120,11 @@ public class CarltonSolitaireCardTableImpl implements CarltonSolitaireCardTable 
     }
 
     @Override
+    public void setValidated(boolean validated) {
+        this.validated = validated;
+    }
+
+    @Override
     public Optional<Action> getLastActionPerformed() {
         if (history.size() < 1) {
             return Optional.empty();
@@ -130,7 +139,9 @@ public class CarltonSolitaireCardTableImpl implements CarltonSolitaireCardTable 
      */
     @Override
     public List<Card> takeCardsFromReserveDeck(int numberOfCardsToTake) throws IllegalArgumentException {
-        validateNumberOfCards(numberOfCardsToTake);
+        if (validated) {
+            validateNumberOfCards(numberOfCardsToTake);
+        }
 
         List<Card> takenCards = new ArrayList<>(numberOfCardsToTake);
         for (int i = 0; reserveDeck.size() > 0 && i < numberOfCardsToTake; i++) {
@@ -142,8 +153,10 @@ public class CarltonSolitaireCardTableImpl implements CarltonSolitaireCardTable 
 
     @Override
     public List<Card> takeCardsFromDeck(int deckNumber, int numberOfCardsToTake) throws IllegalArgumentException {
-        validateDeckNumber(deckNumber);
-        validateNumberOfCards(numberOfCardsToTake);
+        if (validated) {
+            validateDeckNumber(deckNumber);
+            validateNumberOfCards(numberOfCardsToTake);
+        }
 
         List<Card> takenCards = new ArrayList<>(numberOfCardsToTake);
         Stack<Card> deck = decks.get(deckNumber);
@@ -155,8 +168,10 @@ public class CarltonSolitaireCardTableImpl implements CarltonSolitaireCardTable 
 
     @Override
     public List<Card> takeCardsFromResultDeck(int deckNumber, int numberOfCardsToTake) throws IllegalArgumentException {
-        validateDeckNumber(deckNumber);
-        validateNumberOfCards(numberOfCardsToTake);
+        if (validated) {
+            validateDeckNumber(deckNumber);
+            validateNumberOfCards(numberOfCardsToTake);
+        }
 
         List<Card> takenCards = new ArrayList<>(numberOfCardsToTake);
         Stack<Card> deck = resultDecks.get(deckNumber);
@@ -169,28 +184,34 @@ public class CarltonSolitaireCardTableImpl implements CarltonSolitaireCardTable 
 
     @Override
     public void putCardsToReserveDeck(List<Card> cards) {
-        validateCardsToPut(cards);
+        if (validated) {
+            validateCardsToPut(cards);
+        }
         reserveDeck.addAll(cards);
     }
 
     @Override
     public void putCardsToDeck(int deckNumber, List<Card> cards) throws IllegalArgumentException {
-        validateDeckNumber(deckNumber);
-        if (decks.get(deckNumber).size() > 0) {
-            validateCardsToPut(decks.get(deckNumber).peek(), cards);
-        } else {
-            validateCardsToPut(cards);
+        if (validated) {
+            validateDeckNumber(deckNumber);
+            if (decks.get(deckNumber).size() > 0) {
+                validateCardsToPut(decks.get(deckNumber).peek(), cards);
+            } else {
+                validateCardsToPut(cards);
+            }
         }
         decks.get(deckNumber).addAll(cards);
     }
 
     @Override
     public void putCardsToResultDeck(int deckNumber, List<Card> cards) throws IllegalArgumentException {
-        validateDeckNumber(deckNumber);
-        if (resultDecks.get(deckNumber).size() > 0) {
-            validateCardsToPut(resultDecks.get(deckNumber).peek(), cards);
-        } else {
-            validateCardsToPut(cards);
+        if (validated) {
+            validateDeckNumber(deckNumber);
+            if (resultDecks.get(deckNumber).size() > 0) {
+                validateCardsToPutInResultDeck(resultDecks.get(deckNumber).peek(), cards);
+            } else {
+                validateCardsToPutInResultDeck(cards);
+            }
         }
         resultDecks.get(deckNumber).addAll(cards);
     }
@@ -208,32 +229,65 @@ public class CarltonSolitaireCardTableImpl implements CarltonSolitaireCardTable 
     }
 
     /**
-     * Checks if first card has the opposite suit color and incremented value.
+     * Only "A" cards can be placed at the top of result deck.
      *
      * @param cards list of cards
      */
+    private void validateCardsToPutInResultDeck(List<Card> cards) throws IllegalArgumentException {
+        validateCardsToPutInResultDeck(null, cards);
+    }
+
+    /**
+     * Checks if first card has the opposite suit color and incremented value.
+     * Only "A" cards can be placed at the top of result deck.
+     *
+     * @param cardInDeck last card in deck or null
+     * @param cards list of cards
+     */
+    private void validateCardsToPutInResultDeck(Card cardInDeck, List<Card> cards) throws IllegalArgumentException {
+        requireNonNull(cards);
+        if (cards.size() < 1) {
+            return;
+        }
+        validateTopCard(cardInDeck, cards.get(0), CardValue.V_A);
+    }
+
     private void validateCardsToPut(List<Card> cards) throws IllegalArgumentException {
         validateCardsToPut(null, cards);
     }
 
     /**
-     * Checks if first card has the opposite suit color and incremented value.
+     * Checks if first card has the opposite suit color and decremented value.
+     * Only "K" cards can be placed at the top of result deck.
      *
      * @param cardInDeck last card in deck or null
      * @param cards list of cards
      */
     private void validateCardsToPut(Card cardInDeck, List<Card> cards) throws IllegalArgumentException {
         requireNonNull(cards);
-        if (cards.size() < 1 || cardInDeck == null) {
+        if (cards.size() < 1) {
             return;
         }
+        validateTopCard(cardInDeck, cards.get(0), CardValue.V_K);
+    }
 
-        Card cardToPut = cards.get(0);
-        if (cardToPut.getCardValue().ordinal() != cardInDeck.getCardValue().ordinal() + 1) {
-            throw new IllegalArgumentException("Illegal card value: " + cardToPut.getCardValue().getSymbol());
-        }
-        if (isRed(cardInDeck) == isRed(cardToPut)) {
-            throw new IllegalArgumentException("Illegal card suit color: " + cardToString(cardToPut));
+    /**
+     * @param cardInDeck last card from deck or null
+     * @param cardToPut card to put in deck
+     * @param cardValue card value required at the top of deck
+     */
+    private void validateTopCard(Card cardInDeck, Card cardToPut, CardValue cardValue) throws IllegalArgumentException {
+        if (cardInDeck == null) {
+            if (cardToPut.getCardValue() != cardValue) {
+                throw new IllegalArgumentException("Illegal card value: " + cardToPut.getCardValue().getSymbol());
+            }
+        } else {
+            if (cardToPut.getCardValue().ordinal() != cardInDeck.getCardValue().ordinal() - 1) {
+                throw new IllegalArgumentException("Illegal card value: " + cardToPut.getCardValue().getSymbol());
+            }
+            if (isRed(cardInDeck) == isRed(cardToPut)) {
+                throw new IllegalArgumentException("Illegal card suit color: " + cardToString(cardToPut));
+            }
         }
     }
 
@@ -244,7 +298,7 @@ public class CarltonSolitaireCardTableImpl implements CarltonSolitaireCardTable 
     }
 
     private String cardToString(Card card) {
-        return String.format("[%s%1s %4s%s]", (isRed(card)) ? ANSI_RED : ANSI_BLACK,
+        return format("[%s%1s %4s%s]", (isRed(card)) ? ANSI_RED : ANSI_BLACK,
                 card.getCardSuit().getSymbol(), card.getCardValue().getSymbol(), ANSI_RESET);
     }
 
