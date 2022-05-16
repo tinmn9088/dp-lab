@@ -63,7 +63,7 @@ public class CarltonSolitaireCardTableImpl implements CarltonSolitaireCardTable 
 
     @Override
     public void print() {
-        System.out.print(" [Res. deck]   ");
+        System.out.print(format(" [Res. deck +%2s]   ", reserveDeck.size()));
 
         { // print result decks
             int resultDecksHeight = getResultDecksHeight();
@@ -73,7 +73,7 @@ public class CarltonSolitaireCardTableImpl implements CarltonSolitaireCardTable 
             }
             for (int row = 0; row < resultDecksHeight; row++) {
                 if (row > 0) {
-                    System.out.print("               ");
+                    System.out.print("                  ");
                 }
                 for (Iterator<Card> cardIterator : resultDecksIterators) {
                     System.out.printf("%s  ",
@@ -95,7 +95,7 @@ public class CarltonSolitaireCardTableImpl implements CarltonSolitaireCardTable 
                 decksIterators.add(deck.iterator());
             }
             for (int row = 0; row < decksHeight; row++) {
-                System.out.print("               ");
+                System.out.print("                   ");
                 for (Iterator<Card> cardIterator : decksIterators) {
                     System.out.printf("%s  ",
                             (cardIterator.hasNext())
@@ -188,6 +188,9 @@ public class CarltonSolitaireCardTableImpl implements CarltonSolitaireCardTable 
             validateCardsToPut(cards);
         }
         reserveDeck.addAll(cards);
+        List<Card> shuffledReserveDeck = shuffleDeck(reserveDeck);
+        reserveDeck.clear();
+        reserveDeck.addAll(shuffledReserveDeck);
     }
 
     @Override
