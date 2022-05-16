@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class Main {
 
-    private static final String QUIT_STR = ":q";
+    private static final String QUIT_STR = "exit";
 
     public static void main(String[] args) {
         System.out.println("+-----------------------------------+");
