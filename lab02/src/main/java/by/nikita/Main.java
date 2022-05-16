@@ -23,7 +23,7 @@ public class Main {
 
         cardTable.print();
         System.out.print(">>> "); String userInput = scanner.nextLine();
-        while (!userInput.equals(QUIT_STR)) {
+        while (!userInput.equals(QUIT_STR) || cardTable.gameContinues()) {
             controller.process(userInput);
             cardTable.print();
             System.out.print(">>> "); userInput = scanner.nextLine();

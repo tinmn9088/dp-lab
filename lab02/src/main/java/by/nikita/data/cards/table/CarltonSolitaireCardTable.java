@@ -27,4 +27,6 @@ public interface CarltonSolitaireCardTable extends SolitaireCardTable {
     void putCardsToDeck(int deckNumber, List<Card> cards);
 
     void putCardsToResultDeck(int deckNumber, List<Card> cards);
+
+    boolean gameContinues();
 }

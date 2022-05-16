@@ -16,7 +16,7 @@ public class TakeCardsFromResultDeckActionProcessor extends UserInputProcessor {
     @Override
     public void process(String userInput) {
         userInput = userInput.strip();
-        if (userInput.matches("take\\s+from\\s+\\d+\\s+result\\s+deck\\s+\\d+\\s+tacards")) {
+        if (userInput.matches("take\\s+from\\s+\\d+\\s+result\\s+deck\\s+\\d+\\s+cards")) {
             String[] parts = userInput.split("\\s+");
             int deckNumber = parseInt(parts[2]) - 1;
             int numberOfCards = parseInt(parts[5]);

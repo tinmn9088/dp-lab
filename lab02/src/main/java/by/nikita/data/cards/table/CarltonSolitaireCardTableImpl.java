@@ -24,6 +24,8 @@ public class CarltonSolitaireCardTableImpl implements CarltonSolitaireCardTable 
 
     private final static String ANSI_BLACK = "\u001B[30m";
 
+    private final static String ANSI_WHITE_BACKGROUND = "\u001B[47m";
+    
     private final static String ANSI_RESET = "\u001B[0m";
 
     private List<Stack<Card>> resultDecks = new ArrayList<>(NUMBER_OF_DECKS);
@@ -34,7 +36,7 @@ public class CarltonSolitaireCardTableImpl implements CarltonSolitaireCardTable 
 
     private Stack<Action> history = new Stack<>();
 
-    private boolean validated = false;
+    private boolean validated = true;
 
     public CarltonSolitaireCardTableImpl(Collection<Card> cards) {
         for (int i = 0; i < NUMBER_OF_DECKS; i++) {
@@ -73,7 +75,7 @@ public class CarltonSolitaireCardTableImpl implements CarltonSolitaireCardTable 
             }
             for (int row = 0; row < resultDecksHeight; row++) {
                 if (row > 0) {
-                    System.out.print("                  ");
+                    System.out.print("                   ");
                 }
                 for (Iterator<Card> cardIterator : resultDecksIterators) {
                     System.out.printf("%s  ",
@@ -218,6 +220,16 @@ public class CarltonSolitaireCardTableImpl implements CarltonSolitaireCardTable 
         resultDecks.get(deckNumber).addAll(cards);
     }
 
+    @Override
+    public boolean gameContinues() {
+        for (Stack<Card> deck : decks) {
+            if (deck.size() < CardValue.values().length) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     private void validateNumberOfCards(int numberOfCards) throws IllegalArgumentException {
         if (numberOfCards <= 0) {
             throw new IllegalArgumentException("Illegal number of cards: " + numberOfCards);
@@ -251,7 +263,22 @@ public class CarltonSolitaireCardTableImpl implements CarltonSolitaireCardTable 
         if (cards.size() < 1) {
             return;
         }
-        validateTopCard(cardInDeck, cards.get(0), CardValue.V_A);
+        if (cards.size() > 1) {
+            throw new IllegalArgumentException("Illegal number of cards put in result deck");
+        }
+        Card cardToPut = cards.get(0);
+        if (cardInDeck == null) {
+            if (cardToPut.getCardValue() != CardValue.V_A) {
+                throw new IllegalArgumentException("Illegal card value: " + cardToPut.getCardValue().getSymbol());
+            }
+        } else {
+            if (cardToPut.getCardValue().ordinal() != cardInDeck.getCardValue().ordinal() + 1) {
+                throw new IllegalArgumentException("Illegal card value: " + cardToPut.getCardValue().getSymbol());
+            }
+            if (cardInDeck.getCardSuit() != cardToPut.getCardSuit()) {
+                throw new IllegalArgumentException("Illegal card suit: " + cardToPut.getCardSuit().getSymbol());
+            }
+        }
     }
 
     private void validateCardsToPut(List<Card> cards) throws IllegalArgumentException {
@@ -270,17 +297,9 @@ public class CarltonSolitaireCardTableImpl implements CarltonSolitaireCardTable 
         if (cards.size() < 1) {
             return;
         }
-        validateTopCard(cardInDeck, cards.get(0), CardValue.V_K);
-    }
-
-    /**
-     * @param cardInDeck last card from deck or null
-     * @param cardToPut card to put in deck
-     * @param cardValue card value required at the top of deck
-     */
-    private void validateTopCard(Card cardInDeck, Card cardToPut, CardValue cardValue) throws IllegalArgumentException {
+        Card cardToPut = cards.get(0);
         if (cardInDeck == null) {
-            if (cardToPut.getCardValue() != cardValue) {
+            if (cardToPut.getCardValue() != CardValue.V_K) {
                 throw new IllegalArgumentException("Illegal card value: " + cardToPut.getCardValue().getSymbol());
             }
         } else {
@@ -300,8 +319,8 @@ public class CarltonSolitaireCardTableImpl implements CarltonSolitaireCardTable 
     }
 
     private String cardToString(Card card) {
-        return format("[%s%1s %4s%s]", (isRed(card)) ? ANSI_RED : ANSI_BLACK,
-                card.getCardSuit().getSymbol(), card.getCardValue().getSymbol(), ANSI_RESET);
+        return format("%s%s%1s   %4s%s%s", ANSI_WHITE_BACKGROUND, (isRed(card)) ? ANSI_RED : ANSI_BLACK,
+                card.getCardSuit().getSymbol(), card.getCardValue().getSymbol(), ANSI_WHITE_BACKGROUND, ANSI_RESET);
     }
 
     private boolean isRed(Card card) {
