@@ -40,8 +40,8 @@ public class TakeCardsFromReserveAction implements TakeListAction {
         carltonSolitaireCardTable.setValidated(false);
         carltonSolitaireCardTable.putCardsToReserveDeck(takenCards);
         carltonSolitaireCardTable.setValidated(true);
-        takenCards.clear();
         System.out.println(takenCards.size() + " cards put");
+        takenCards.clear();
     }
 
     @Override

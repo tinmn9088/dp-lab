@@ -37,8 +37,8 @@ public class TakeCardsAction implements TakeListAction {
         carltonSolitaireCardTable.setValidated(false);
         carltonSolitaireCardTable.putCardsToDeck(deckNumber, takenCards);
         carltonSolitaireCardTable.setValidated(true);
-        takenCards.clear();
         System.out.println(takenCards.size() + " cards put");
+        takenCards.clear();
     }
 
     @Override

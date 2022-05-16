@@ -37,8 +37,8 @@ public class TakeCardsFromResultDeckAction implements TakeListAction {
         carltonSolitaireCardTable.setValidated(false);
         carltonSolitaireCardTable.putCardsToResultDeck(deckNumber, takenCards);
         carltonSolitaireCardTable.setValidated(true);
-        takenCards.clear();
         System.out.println(takenCards.size() + " cards put");
+        takenCards.clear();
     }
 
     @Override
