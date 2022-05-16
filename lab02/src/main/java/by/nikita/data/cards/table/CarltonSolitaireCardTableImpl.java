@@ -169,21 +169,29 @@ public class CarltonSolitaireCardTableImpl implements CarltonSolitaireCardTable 
 
     @Override
     public void putCardsToReserveDeck(List<Card> cards) {
-        requireNonNull(cards);
+        validateCardsToPut(cards);
         reserveDeck.addAll(cards);
     }
 
     @Override
     public void putCardsToDeck(int deckNumber, List<Card> cards) throws IllegalArgumentException {
         validateDeckNumber(deckNumber);
-        requireNonNull(cards);
+        if (decks.get(deckNumber).size() > 0) {
+            validateCardsToPut(decks.get(deckNumber).peek(), cards);
+        } else {
+            validateCardsToPut(cards);
+        }
         decks.get(deckNumber).addAll(cards);
     }
 
     @Override
     public void putCardsToResultDeck(int deckNumber, List<Card> cards) throws IllegalArgumentException {
         validateDeckNumber(deckNumber);
-        requireNonNull(cards);
+        if (resultDecks.get(deckNumber).size() > 0) {
+            validateCardsToPut(resultDecks.get(deckNumber).peek(), cards);
+        } else {
+            validateCardsToPut(cards);
+        }
         resultDecks.get(deckNumber).addAll(cards);
     }
 
@@ -199,6 +207,36 @@ public class CarltonSolitaireCardTableImpl implements CarltonSolitaireCardTable 
         }
     }
 
+    /**
+     * Checks if first card has the opposite suit color and incremented value.
+     *
+     * @param cards list of cards
+     */
+    private void validateCardsToPut(List<Card> cards) throws IllegalArgumentException {
+        validateCardsToPut(null, cards);
+    }
+
+    /**
+     * Checks if first card has the opposite suit color and incremented value.
+     *
+     * @param cardInDeck last card in deck or null
+     * @param cards list of cards
+     */
+    private void validateCardsToPut(Card cardInDeck, List<Card> cards) throws IllegalArgumentException {
+        requireNonNull(cards);
+        if (cards.size() < 1 || cardInDeck == null) {
+            return;
+        }
+
+        Card cardToPut = cards.get(0);
+        if (cardToPut.getCardValue().ordinal() != cardInDeck.getCardValue().ordinal() + 1) {
+            throw new IllegalArgumentException("Illegal card value: " + cardToPut.getCardValue().getSymbol());
+        }
+        if (isRed(cardInDeck) == isRed(cardToPut)) {
+            throw new IllegalArgumentException("Illegal card suit color: " + cardToString(cardToPut));
+        }
+    }
+
     private List<Card> shuffleDeck(Collection<Card> deck) {
         List<Card> shuffledDeck = list(enumeration(deck));
         shuffle(shuffledDeck);
@@ -206,9 +244,12 @@ public class CarltonSolitaireCardTableImpl implements CarltonSolitaireCardTable 
     }
 
     private String cardToString(Card card) {
-        boolean isRed = card.getCardSuit() == CardSuit.HEARTS || card.getCardSuit() == CardSuit.DIAMONDS;
-        return String.format("[%s%1s %4s%s]", (isRed) ? ANSI_RED : ANSI_BLACK,
+        return String.format("[%s%1s %4s%s]", (isRed(card)) ? ANSI_RED : ANSI_BLACK,
                 card.getCardSuit().getSymbol(), card.getCardValue().getSymbol(), ANSI_RESET);
+    }
+
+    private boolean isRed(Card card) {
+        return card.getCardSuit() == CardSuit.HEARTS || card.getCardSuit() == CardSuit.DIAMONDS;
     }
 
     private int getResultDecksHeight() {
