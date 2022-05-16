@@ -116,7 +116,9 @@ public class CarltonSolitaireCardTableImpl implements CarltonSolitaireCardTable 
 
     @Override
     public void undoLast() {
-        history.pop().undo();
+        if (history.size() > 0) {
+            history.pop().undo();
+        }
     }
 
     @Override
