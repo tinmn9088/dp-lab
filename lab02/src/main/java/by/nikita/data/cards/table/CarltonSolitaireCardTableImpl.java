@@ -132,23 +132,17 @@ public class CarltonSolitaireCardTableImpl implements CarltonSolitaireCardTable 
         return Optional.of(history.peek());
     }
 
-    /**
-     * @param numberOfCardsToTake positive number
-     * @return list of cards with size <= to number of cards to take
-     * @throws IllegalArgumentException if number of cards to take is non-positive
-     */
     @Override
-    public List<Card> takeCardsFromReserveDeck(int numberOfCardsToTake) throws IllegalArgumentException {
-        if (validated) {
-            validateNumberOfCards(numberOfCardsToTake);
-        }
-
-        List<Card> takenCards = new ArrayList<>(numberOfCardsToTake);
-        for (int i = 0; reserveDeck.size() > 0 && i < numberOfCardsToTake; i++) {
+    public void takeCardsFromReserveDeck() throws IllegalArgumentException {
+        Stack<Card> takenCards = new Stack<>();
+        for (int i = 0; reserveDeck.size() > 0 && i < decks.size(); i++) {
             takenCards.add(reserveDeck.pop());
         }
-
-        return takenCards;
+        for (Stack<Card> deck : decks) {
+            if (takenCards.size() > 0) {
+                deck.push(takenCards.pop());
+            }
+        }
     }
 
     @Override
@@ -183,14 +177,17 @@ public class CarltonSolitaireCardTableImpl implements CarltonSolitaireCardTable 
     }
 
     @Override
-    public void putCardsToReserveDeck(List<Card> cards) {
-        if (validated) {
-            validateCardsToPut(cards);
+    public void returnCardsToReserveDeck() {
+        List<Card> cardsToReturn = new ArrayList<>();
+        for (Stack<Card> deck : decks) {
+            if (deck.size() > 0) {
+                cardsToReturn.add(deck.pop());
+            }
         }
-        reserveDeck.addAll(cards);
-        List<Card> shuffledReserveDeck = shuffleDeck(reserveDeck);
+        reserveDeck.addAll(cardsToReturn);
+        List<Card> shuffledCardsFromReserveDeck = shuffleDeck(reserveDeck);
         reserveDeck.clear();
-        reserveDeck.addAll(shuffledReserveDeck);
+        reserveDeck.addAll(shuffledCardsFromReserveDeck);
     }
 
     @Override

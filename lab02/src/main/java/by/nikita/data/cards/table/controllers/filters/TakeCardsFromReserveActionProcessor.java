@@ -17,7 +17,7 @@ public class TakeCardsFromReserveActionProcessor extends UserInputProcessor {
     public void process(String userInput) {
         userInput = userInput.strip();
         if (userInput.matches("take\\s+from\\s+reserve\\s+deck")) {
-            Action action = new TakeCardsFromReserveAction(getCarltonSolitaireCardTable(), 1);
+            Action action = new TakeCardsFromReserveAction(getCarltonSolitaireCardTable());
             getCarltonSolitaireCardTable().perform(action);
         } else {
             handleSyntaxError(userInput);
