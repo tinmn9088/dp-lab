@@ -25,7 +25,7 @@ public class PutCardsAction implements Action {
     @Override
     public void perform() {
         carltonSolitaireCardTable.putCardsToDeck(deckNumber, takenCards);
-        System.out.println("Cards put in deck " + deckNumber);
+        System.out.println("Cards put in deck " + (deckNumber + 1));
     }
 
     @Override
@@ -33,6 +33,6 @@ public class PutCardsAction implements Action {
         carltonSolitaireCardTable.setValidated(false);
         carltonSolitaireCardTable.takeCardsFromDeck(deckNumber, takenCards.size());
         carltonSolitaireCardTable.setValidated(true);
-        System.out.println("Cards taken from deck " + deckNumber);
+        System.out.println("Cards taken from deck " + (deckNumber + 1));
     }
 }
