@@ -5,6 +5,7 @@ import by.nikita.data.cards.table.CarltonSolitaireCardTable;
 
 import java.util.List;
 
+import static java.util.Collections.reverse;
 import static java.util.Objects.requireNonNull;
 
 public class TakeCardsFromReserveAction implements TakeListAction {
@@ -35,7 +36,9 @@ public class TakeCardsFromReserveAction implements TakeListAction {
 
     @Override
     public void undo() {
+        reverse(takenCards);
         carltonSolitaireCardTable.putCardsToReserveDeck(takenCards);
+        takenCards.clear();
         System.out.println(takenCards.size() + " cards put");
     }
 
