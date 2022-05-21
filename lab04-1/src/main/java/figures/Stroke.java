@@ -2,7 +2,7 @@ package figures;
 
 import java.awt.*;
 
-public class Stroke implements Figure {
+public class Stroke implements FigureProperty {
 	private java.awt.Stroke stroke;
 
 	public Stroke(int width) {
@@ -10,7 +10,7 @@ public class Stroke implements Figure {
 	}
 
 	@Override
-	public void paint(Graphics2D g) {
+	public void set(Graphics2D g) {
 		g.setStroke(stroke);
 	}
 }

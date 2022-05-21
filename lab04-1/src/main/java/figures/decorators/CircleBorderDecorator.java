@@ -1,10 +1,10 @@
 package figures.decorators;
 
 import figures.CircleBorder;
-import figures.Figure;
+import figures.FigureProperty;
 
 public class CircleBorderDecorator extends FigureDecorator<CircleBorder> {
-    public CircleBorderDecorator(CircleBorder circleBorder, Figure... init) {
+    public CircleBorderDecorator(CircleBorder circleBorder, FigureProperty... init) {
         super(circleBorder, init);
     }
 }

@@ -1,11 +1,10 @@
 package figures.decorators;
 
-import figures.Figure;
+import figures.FigureProperty;
 import figures.Polygon;
-import figures.Polyline;
 
 public class PolygonDecorator extends FigureDecorator<Polygon> {
-    public PolygonDecorator(Polygon polygon, Figure... init) {
+    public PolygonDecorator(Polygon polygon, FigureProperty... init) {
         super(polygon, init);
     }
 }

@@ -1,10 +1,10 @@
 package figures.decorators;
 
-import figures.Figure;
+import figures.FigureProperty;
 import figures.Line;
 
 public class LineDecorator extends FigureDecorator<Line> {
-    public LineDecorator(Line line, Figure... init) {
+    public LineDecorator(Line line, FigureProperty... init) {
         super(line, init);
     }
 }

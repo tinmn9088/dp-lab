@@ -1,10 +1,10 @@
 package figures.decorators;
 
-import figures.Figure;
+import figures.FigureProperty;
 import figures.Rectangle;
 
 public class RectangleDecorator extends FigureDecorator<Rectangle> {
-    public RectangleDecorator(Rectangle rectangle, Figure... init) {
+    public RectangleDecorator(Rectangle rectangle, FigureProperty... init) {
         super(rectangle, init);
     }
 }

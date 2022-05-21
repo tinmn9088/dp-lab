@@ -2,7 +2,7 @@ package figures;
 
 import java.awt.*;
 
-public class RadialGradient implements Figure {
+public class RadialGradient implements FigureProperty {
 	private MultipleGradientPaint gradient;
 
 	public RadialGradient(Circle circle, Color centerColor, Color borderColor) {
@@ -10,7 +10,7 @@ public class RadialGradient implements Figure {
 	}
 
 	@Override
-	public void paint(Graphics2D g) {
+	public void set(Graphics2D g) {
 		g.setPaint(gradient);
 	}
 }

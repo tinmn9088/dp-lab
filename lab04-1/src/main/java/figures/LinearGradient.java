@@ -2,7 +2,7 @@ package figures;
 
 import java.awt.*;
 
-public class LinearGradient implements Figure {
+public class LinearGradient implements FigureProperty {
 	private MultipleGradientPaint gradient;
 
 	public LinearGradient(Line line, Color beginColor, Color endColor) {
@@ -10,7 +10,7 @@ public class LinearGradient implements Figure {
 	}
 
 	@Override
-	public void paint(Graphics2D g) {
+	public void set(Graphics2D g) {
 		g.setPaint(gradient);
 	}
 }

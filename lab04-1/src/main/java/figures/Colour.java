@@ -3,7 +3,7 @@ package figures;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
-public class Colour implements Figure {
+public class Colour implements FigureProperty {
 	private Color color;
 
 	public Colour(Color color) {
@@ -11,7 +11,7 @@ public class Colour implements Figure {
 	}
 
 	@Override
-	public void paint(Graphics2D g) {
+	public void set(Graphics2D g) {
 		g.setColor(color);
 	}
 }
