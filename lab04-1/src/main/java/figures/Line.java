@@ -1,6 +1,8 @@
-import java.awt.Graphics2D;
+package figures;
 
-public class Line {
+import java.awt.*;
+
+public class Line implements Figure {
 	private Point begin;
 	private Point end;
 
@@ -17,6 +19,7 @@ public class Line {
 		return end;
 	}
 
+	@Override
 	public void paint(Graphics2D g) {
 		g.drawLine(begin.getX(), begin.getY(), end.getX(), end.getY());
 	}

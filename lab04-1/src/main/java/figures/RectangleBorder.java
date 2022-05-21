@@ -1,6 +1,8 @@
-import java.awt.Graphics2D;
+package figures;
 
-public class RectangleBorder {
+import java.awt.*;
+
+public class RectangleBorder implements Figure {
 	private int x;
 	private int y;
 	private int width;
@@ -13,6 +15,7 @@ public class RectangleBorder {
 		this.height = height;
 	}
 
+	@Override
 	public void paint(Graphics2D g) {
 		g.drawRect(x, y, width, height);
 	}

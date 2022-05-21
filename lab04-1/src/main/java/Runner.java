@@ -1,3 +1,5 @@
+import figures.*;
+
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -7,7 +9,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 public class Runner {
 	public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
-		Collection<Object> figures = new ArrayList<>();
+		Collection<Figure> figures = new ArrayList<>();
 		figures.add(new LinearGradient(new Line(new Point(0, 250), new Point(0, 350)), new Color(0, 128, 255), new Color(0, 0, 128)));
 		figures.add(new Rectangle(new Point(275, 300), 550, 100));
 		figures.add(new Colour(Color.YELLOW));

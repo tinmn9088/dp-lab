@@ -1,11 +1,13 @@
-import java.awt.Graphics2D;
+package figures;
 
-public class Polyline {
+import java.awt.*;
+
+public class Polygon implements Figure {
 	private int[] x;
 	private int[] y;
 	private int n;
 
-	public Polyline(Point ... points) {
+	public Polygon(Point... points) {
 		n = points.length;
 		x = new int[n];
 		y = new int[n];
@@ -15,7 +17,8 @@ public class Polyline {
 		}
 	}
 
+	@Override
 	public void paint(Graphics2D g) {
-		g.drawPolyline(x, y, n);
+		g.fillPolygon(x, y, n);
 	}
 }

@@ -1,6 +1,8 @@
+package figures;
+
 import java.awt.Graphics2D;
 
-public class Circle {
+public class Circle implements Figure {
 	private Point center;
 	private int radius;
 	private int x;
@@ -23,6 +25,7 @@ public class Circle {
 		return radius;
 	}
 
+	@Override
 	public void paint(Graphics2D g) {
 		g.fillOval(x, y, diameter, diameter);
 	}

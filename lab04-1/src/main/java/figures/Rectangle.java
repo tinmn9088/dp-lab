@@ -1,6 +1,8 @@
-import java.awt.Graphics2D;
+package figures;
 
-public class Rectangle {
+import java.awt.*;
+
+public class Rectangle implements Figure {
 	private int x;
 	private int y;
 	private int width;
@@ -13,6 +15,7 @@ public class Rectangle {
 		this.height = height;
 	}
 
+	@Override
 	public void paint(Graphics2D g) {
 		g.fillRect(x, y, width, height);
 	}
