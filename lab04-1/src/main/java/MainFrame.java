@@ -4,7 +4,7 @@ import javax.swing.JFrame;
 
 public class MainFrame extends JFrame {
 	public MainFrame(String title, int width, int height, Picture picture) {
-		super("Космический корабль");
+		super(title);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		add(picture);
 		setVisible(true);
