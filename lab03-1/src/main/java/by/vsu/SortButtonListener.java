@@ -17,7 +17,7 @@ public class SortButtonListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        Collections.sort(model.getPersons(), new PersonComparator((String)comboBox.getSelectedItem()));
+        Collections.sort(model.getPersons(), new PersonComparatorFactory().create((String)comboBox.getSelectedItem()));
         model.update();
     }
 }
