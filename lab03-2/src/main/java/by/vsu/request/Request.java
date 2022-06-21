@@ -1,7 +1,5 @@
 package by.vsu.request;
 
-import by.vsu.flat.Flat;
-
 import java.time.LocalDate;
 
 public class Request {
