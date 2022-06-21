@@ -7,6 +7,7 @@ public class Person {
     private String middleName;
     private String lastName;
     private Date birthday;
+    private String email;
 
     public String getFirstName() {
         return firstName;
@@ -38,5 +39,13 @@ public class Person {
 
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

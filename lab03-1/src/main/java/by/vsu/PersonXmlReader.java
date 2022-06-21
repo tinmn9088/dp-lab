@@ -48,6 +48,9 @@ public class PersonXmlReader {
                                 String birthday = reader.getElementText();
                                 person.setBirthday(format.parse(birthday));
                                 break;
+                            case "email":
+                                person.setEmail(reader.getElementText());
+                                break;
                         }
                         break;
                     }

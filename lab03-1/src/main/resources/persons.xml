@@ -6,29 +6,34 @@
         <middle-name>Иван</middle-name>
         <last-name>Иванович</last-name>
         <birthday>1982-01-01</birthday>
+        <email>example@mail.ru</email>
     </person>
     <person>
         <first-name>Петров</first-name>
         <middle-name>Пётр</middle-name>
         <last-name>Петрович</last-name>
         <birthday>1965-02-25</birthday>
+        <email>petr1@mail.ru</email>
     </person>
     <person>
         <first-name>Сидоров</first-name>
         <middle-name>Сидор</middle-name>
         <last-name>Сидорович</last-name>
         <birthday>1978-05-03</birthday>
+        <email>sidorpomidor@yandex.ru</email>
     </person>
     <person>
         <first-name>Васильев</first-name>
         <middle-name>Василий</middle-name>
         <last-name>Васильевич</last-name>
         <birthday>1991-02-13</birthday>
+        <email>brrrr@gmail.com</email>
     </person>
     <person>
         <first-name>Кюльбрехт</first-name>
         <middle-name>Сигизмунд</middle-name>
         <last-name>Эдуардович</last-name>
         <birthday>2000-01-31</birthday>
+        <email>tsarz@yahoo.com</email>
     </person>
 </persons>

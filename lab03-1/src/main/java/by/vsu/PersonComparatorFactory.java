@@ -28,6 +28,12 @@ public class PersonComparatorFactory {
                 c2.setTime(p2.getBirthday());
                 return Integer.compare(c1.get(Calendar.MONTH), c2.get(Calendar.MONTH));
             };
+            case "по email": return (Person p1, Person p2) -> {
+                String email1 = p1.getEmail().substring(p1.getEmail().indexOf("@") + 1);
+                String email2 = p2.getEmail().substring(p2.getEmail().indexOf("@") + 1);
+                System.out.println(email1 + " " + email2);
+                return email1.compareTo(email2);
+            };
         }
         throw new IllegalArgumentException("Illegal type: " + type);
     }

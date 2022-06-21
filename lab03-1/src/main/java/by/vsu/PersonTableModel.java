@@ -19,7 +19,7 @@ public class PersonTableModel implements TableModel {
 
     @Override
     public int getColumnCount() {
-        return 4;
+        return 5;
     }
 
     @Override
@@ -29,6 +29,7 @@ public class PersonTableModel implements TableModel {
             case 1: return "Имя";
             case 2: return "Отчество";
             case 3: return "Дата рождения";
+            case 4: return "Email";
         }
         return null;
     }
@@ -57,6 +58,7 @@ public class PersonTableModel implements TableModel {
                 } else {
                     return "неизвестна";
                 }
+            case 4: return persons.get(rowIndex).getEmail();
         }
         return null;
     }

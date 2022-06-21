@@ -30,6 +30,7 @@ public class Main {
         comboBox.addItem("по дате");
         comboBox.addItem("по дню недели");
         comboBox.addItem("по месяцу");
+        comboBox.addItem("по email");
         chooser.add(comboBox, BorderLayout.CENTER);
         JButton sortButton = new JButton("сортировать");
         sortButton.addActionListener(new SortButtonListener(comboBox, model));
