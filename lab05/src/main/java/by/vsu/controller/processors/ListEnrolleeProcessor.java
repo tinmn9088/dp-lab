@@ -1,13 +1,13 @@
 package by.vsu.controller.processors;
 
-import by.vsu.service.commands.ListUserCommand;
+import by.vsu.service.commands.ListEnrolleeCommand;
 import by.vsu.service.EnrolleeService;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 @RequiredArgsConstructor
-public class ListUserProcessor implements Processor {
+public class ListEnrolleeProcessor implements Processor {
 
     @NonNull
     private EnrolleeService enrolleeService;
@@ -17,8 +17,8 @@ public class ListUserProcessor implements Processor {
 
     @Override
     public void process(String userInput) {
-        if (userInput.strip().equals("list-user")) {
-            enrolleeService.execute(new ListUserCommand());
+        if (userInput.strip().equals("list-enrollee")) {
+            enrolleeService.execute(new ListEnrolleeCommand());
         } else {
             next.process(userInput);
         }

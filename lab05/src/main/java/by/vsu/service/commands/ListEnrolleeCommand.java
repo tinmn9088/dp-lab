@@ -2,7 +2,7 @@ package by.vsu.service.commands;
 
 import by.vsu.models.Enrollee;
 
-public class ListUserCommand extends Command {
+public class ListEnrolleeCommand extends Command {
 
     @Override
     public void run() {
