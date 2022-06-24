@@ -4,13 +4,16 @@ import by.vsu.models.Enrollee;
 import by.vsu.models.Faculty;
 import by.vsu.models.Speciality;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
 import static java.util.Objects.requireNonNull;
 
-public class EnrolleeDaoImpl implements EnrolleeDao {
+public class EnrolleeDaoImpl implements EnrolleeDao, Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private Set<Faculty> faculties = new HashSet();
 
