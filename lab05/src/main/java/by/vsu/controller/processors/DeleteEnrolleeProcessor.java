@@ -3,12 +3,14 @@ package by.vsu.controller.processors;
 import by.vsu.service.EnrolleeService;
 import by.vsu.service.commands.AddEnrolleeCommand;
 import by.vsu.service.commands.Command;
+import by.vsu.service.commands.DeleteEnrolleeCommand;
+import by.vsu.service.commands.ListEnrolleeCommand;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 @RequiredArgsConstructor
-public class AddEnrolleeProcessor implements Processor {
+public class DeleteEnrolleeProcessor implements Processor {
 
     @NonNull
     private EnrolleeService enrolleeService;
@@ -18,16 +20,11 @@ public class AddEnrolleeProcessor implements Processor {
 
     @Override
     public void process(String userInput) {
-        if (userInput.strip().matches("add-enrollee\\s+[\\w-]+\\s+[\\w-]+\\s+[\\w-]+\\s+[\\w-]+")) {
+        if (userInput.strip().matches("delete-enrollee\\s+[\\w-]+")) {
             String[] values = userInput.split("\\s+");
-            String fname = values[1];
-            String lname = values[2];
-            String patronymic = values[3];
-            String specialityId = values[4];
-            System.out.printf("Имя: %s\nФамилия: %s\nОтчество: %s\nСпециальность: %s\n",
-                    fname, lname, patronymic, specialityId);
+            String enrolleeId = values[1];
             try {
-                Command command = new AddEnrolleeCommand(fname, lname, patronymic, specialityId);
+                Command command = new DeleteEnrolleeCommand(enrolleeId);
                 enrolleeService.execute(command);
                 System.out.println("Выполнено: " + command.getMessage());
             } catch (Exception ex) {
