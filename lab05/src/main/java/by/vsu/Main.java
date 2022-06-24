@@ -1,10 +1,7 @@
 package by.vsu;
 
 import by.vsu.controller.EnrolleeController;
-import by.vsu.controller.processors.AddEnrolleeProcessor;
-import by.vsu.controller.processors.DeleteEnrolleeProcessor;
-import by.vsu.controller.processors.ListEnrolleeProcessor;
-import by.vsu.controller.processors.UndoProcessor;
+import by.vsu.controller.processors.*;
 import by.vsu.dao.EnrolleeDao;
 import by.vsu.dao.EnrolleeDaoImpl;
 import by.vsu.service.EnrolleeService;
@@ -24,9 +21,11 @@ public class Main {
         ListEnrolleeProcessor listEnrolleeProcessor = new ListEnrolleeProcessor(enrolleeService);
         AddEnrolleeProcessor addEnrolleeProcessor = new AddEnrolleeProcessor(enrolleeService);
         DeleteEnrolleeProcessor deleteEnrolleeProcessor = new DeleteEnrolleeProcessor(enrolleeService);
+        FindEnrolleeProcessor findEnrolleeProcessor = new FindEnrolleeProcessor(enrolleeService);
         undoProcessor.setNext(listEnrolleeProcessor);
         listEnrolleeProcessor.setNext(addEnrolleeProcessor);
         addEnrolleeProcessor.setNext(deleteEnrolleeProcessor);
+        deleteEnrolleeProcessor.setNext(findEnrolleeProcessor);
 
         EnrolleeController enrolleeController = new EnrolleeController(undoProcessor);
         Scanner scanner = new Scanner(System.in);
