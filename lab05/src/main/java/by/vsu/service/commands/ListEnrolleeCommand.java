@@ -15,4 +15,9 @@ public class ListEnrolleeCommand extends Command {
     @Override
     public void undo() {
     }
+
+    @Override
+    public String getMessage() {
+        return "Вывести список абитуриентов";
+    }
 }

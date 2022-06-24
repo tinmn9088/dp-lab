@@ -11,4 +11,6 @@ public abstract class Command implements Runnable {
     private EnrolleeDao enrolleeDao;
 
     public abstract void undo();
+
+    public String getMessage() { return null; }
 }

@@ -3,6 +3,7 @@ package by.vsu;
 import by.vsu.controller.EnrolleeController;
 import by.vsu.controller.processors.AddEnrolleeProcessor;
 import by.vsu.controller.processors.ListEnrolleeProcessor;
+import by.vsu.controller.processors.UndoProcessor;
 import by.vsu.dao.EnrolleeDao;
 import by.vsu.dao.EnrolleeDaoImpl;
 import by.vsu.service.EnrolleeService;
@@ -18,11 +19,13 @@ public class Main {
         // processors
         EnrolleeDao enrolleeDao = new EnrolleeDaoImpl();
         EnrolleeService enrolleeService = new EnrolleeServiceImpl(enrolleeDao);
+        UndoProcessor undoProcessor = new UndoProcessor(enrolleeService);
         ListEnrolleeProcessor listEnrolleeProcessor = new ListEnrolleeProcessor(enrolleeService);
         AddEnrolleeProcessor addEnrolleeProcessor = new AddEnrolleeProcessor(enrolleeService);
+        undoProcessor.setNext(listEnrolleeProcessor);
         listEnrolleeProcessor.setNext(addEnrolleeProcessor);
 
-        EnrolleeController enrolleeController = new EnrolleeController(listEnrolleeProcessor);
+        EnrolleeController enrolleeController = new EnrolleeController(undoProcessor);
         Scanner scanner = new Scanner(System.in);
         System.out.print(">>> ");
         String userInput = scanner.nextLine();

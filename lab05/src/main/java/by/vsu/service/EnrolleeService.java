@@ -6,5 +6,5 @@ public interface EnrolleeService {
 
     void execute(Command command);
 
-    void undo();
+    Command undo();
 }

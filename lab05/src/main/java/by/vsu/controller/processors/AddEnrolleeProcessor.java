@@ -2,7 +2,7 @@ package by.vsu.controller.processors;
 
 import by.vsu.service.EnrolleeService;
 import by.vsu.service.commands.AddEnrolleeCommand;
-import by.vsu.service.commands.ListEnrolleeCommand;
+import by.vsu.service.commands.Command;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -27,8 +27,9 @@ public class AddEnrolleeProcessor implements Processor {
             System.out.printf("Имя: %s\nФамилия: %s\nОтчество: %s\nСпециальность: %s\n",
                     fname, lname, patronymic, specialityId);
             try {
-                enrolleeService.execute(new AddEnrolleeCommand(fname, lname, patronymic, specialityId));
-                System.out.println("Абитуриент добавлен.");
+                Command command = new AddEnrolleeCommand(fname, lname, patronymic, specialityId);
+                enrolleeService.execute(command);
+                System.out.println("Выполнено: " + command.getMessage());
             } catch (Exception ex) {
                 System.err.println("Ошибка: " + ex);
             }
