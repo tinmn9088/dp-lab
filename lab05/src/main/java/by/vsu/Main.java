@@ -28,6 +28,7 @@ public class Main {
         addEnrolleeProcessor.setNext(deleteEnrolleeProcessor);
         deleteEnrolleeProcessor.setNext(findEnrolleeProcessor);
         findEnrolleeProcessor.setNext(editEnrolleeProcessor);
+        editEnrolleeProcessor.setNext(new IllegalSyntaxProcessor());
 
         EnrolleeController enrolleeController = new EnrolleeController(undoProcessor);
         Scanner scanner = new Scanner(System.in);
