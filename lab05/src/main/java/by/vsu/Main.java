@@ -22,10 +22,12 @@ public class Main {
         AddEnrolleeProcessor addEnrolleeProcessor = new AddEnrolleeProcessor(enrolleeService);
         DeleteEnrolleeProcessor deleteEnrolleeProcessor = new DeleteEnrolleeProcessor(enrolleeService);
         FindEnrolleeProcessor findEnrolleeProcessor = new FindEnrolleeProcessor(enrolleeService);
+        EditEnrolleeProcessor editEnrolleeProcessor = new EditEnrolleeProcessor(enrolleeService);
         undoProcessor.setNext(listEnrolleeProcessor);
         listEnrolleeProcessor.setNext(addEnrolleeProcessor);
         addEnrolleeProcessor.setNext(deleteEnrolleeProcessor);
         deleteEnrolleeProcessor.setNext(findEnrolleeProcessor);
+        findEnrolleeProcessor.setNext(editEnrolleeProcessor);
 
         EnrolleeController enrolleeController = new EnrolleeController(undoProcessor);
         Scanner scanner = new Scanner(System.in);

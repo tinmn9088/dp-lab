@@ -32,6 +32,6 @@ public class DeleteEnrolleeCommand extends Command implements DataChange {
 
     @Override
     public String getMessage() {
-        return (enrolleeToDelete != null) ? "Удалить студента " + enrolleeToDelete.getId() : null;
+        return (enrolleeToDelete != null) ? "Удалить абитериента " + enrolleeToDelete.getId() : null;
     }
 }
