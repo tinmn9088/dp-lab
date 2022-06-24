@@ -1,6 +1,7 @@
 package by.vsu;
 
 import by.vsu.controller.EnrolleeController;
+import by.vsu.controller.processors.AddEnrolleeProcessor;
 import by.vsu.controller.processors.ListEnrolleeProcessor;
 import by.vsu.dao.EnrolleeDao;
 import by.vsu.dao.EnrolleeDaoImpl;
@@ -18,6 +19,8 @@ public class Main {
         EnrolleeDao enrolleeDao = new EnrolleeDaoImpl();
         EnrolleeService enrolleeService = new EnrolleeServiceImpl(enrolleeDao);
         ListEnrolleeProcessor listEnrolleeProcessor = new ListEnrolleeProcessor(enrolleeService);
+        AddEnrolleeProcessor addEnrolleeProcessor = new AddEnrolleeProcessor(enrolleeService);
+        listEnrolleeProcessor.setNext(addEnrolleeProcessor);
 
         EnrolleeController enrolleeController = new EnrolleeController(listEnrolleeProcessor);
         Scanner scanner = new Scanner(System.in);
