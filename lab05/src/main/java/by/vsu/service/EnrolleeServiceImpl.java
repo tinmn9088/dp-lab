@@ -1,6 +1,6 @@
 package by.vsu.service;
 
-import by.vsu.controller.commands.Command;
+import by.vsu.service.commands.Command;
 import by.vsu.dao.EnrolleeDao;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;

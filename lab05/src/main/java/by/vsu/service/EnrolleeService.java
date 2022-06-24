@@ -1,6 +1,6 @@
 package by.vsu.service;
 
-import by.vsu.controller.commands.Command;
+import by.vsu.service.commands.Command;
 
 public interface EnrolleeService {
 

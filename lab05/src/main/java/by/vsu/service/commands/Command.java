@@ -1,4 +1,4 @@
-package by.vsu.controller.commands;
+package by.vsu.service.commands;
 
 import by.vsu.dao.EnrolleeDao;
 import lombok.Getter;

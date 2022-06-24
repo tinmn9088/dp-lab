@@ -1,6 +1,6 @@
 package by.vsu.controller.processors;
 
-import by.vsu.controller.commands.ListUserCommand;
+import by.vsu.service.commands.ListUserCommand;
 import by.vsu.service.EnrolleeService;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
