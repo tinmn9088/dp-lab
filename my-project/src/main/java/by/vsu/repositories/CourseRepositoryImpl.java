@@ -62,7 +62,7 @@ public class CourseRepositoryImpl implements CourseRepository {
     public Course getCourseById(long id) {
         try (Connection con = DriverManager.getConnection(URL, USER, PASSWORD)) {  
             Statement stmt = con.createStatement();  
-            ResultSet rs = stmt.executeQuery("SELECT id, teacher_id, title, speciality, semester, number_of_students, hours_of_lectures, hours_of_practice, hours_of_lab, exam FROM courses");  
+            ResultSet rs = stmt.executeQuery("SELECT id, teacher_id, title, speciality, semester, number_of_students, hours_of_lectures, hours_of_practice, hours_of_lab, exam FROM courses WHERE id=" + id);  
             if (rs.next()) {
                 Course course = new Course();
                 course.setId(rs.getLong(1));
