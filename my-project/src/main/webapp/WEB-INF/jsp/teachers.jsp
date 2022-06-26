@@ -13,7 +13,9 @@
     <ul>
       <% List<Teacher> teachers = (List<Teacher>) request.getAttribute("teachers"); %>
       <% for (Teacher t : teachers) { %>
-        <li><%= t %></li>
+        <a href="courses?teacherId=<%= t.getId() %>">
+          <li><%= t %></li>
+        </a>
       <% } %>
     </ul>
 
