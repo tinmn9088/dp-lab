@@ -81,4 +81,30 @@ public class CourseRepositoryImpl implements CourseRepository {
             throw new RepositoryException(e);
         }  
     }
+
+    @Override
+    public List<Course> getCoursesByTeacherId(long teacherId) {
+        List<Course> courses = new LinkedList<>();
+        try (Connection con = DriverManager.getConnection(URL, USER, PASSWORD)) {  
+            Statement stmt= con.createStatement();  
+            ResultSet rs = stmt.executeQuery("SELECT id, teacher_id, title, speciality, semester, number_of_students, hours_of_lectures, hours_of_practice, hours_of_lab, exam FROM courses WHERE teacher_id=" + teacherId);  
+            while (rs.next()) {
+                Course course = new Course();
+                course.setId(rs.getLong(1));
+                course.setTeacher(teacherRepository.getTeacherById(rs.getLong(2)));
+                course.setTitle(rs.getString(3));
+                course.setSpeciality(rs.getString(4));
+                course.setSemester(rs.getInt(5));
+                course.setNumberOfStudents(rs.getInt(6));
+                course.setHoursOfLectures(rs.getInt(7));
+                course.setHoursOfPractice(rs.getInt(8));
+                course.setHoursOfLaboratoryWork(rs.getInt(9));
+                course.setExam(rs.getBoolean(10));
+                courses.add(course);
+            }
+        } catch (Exception e) { 
+            throw new RepositoryException(e);
+        }  
+        return courses;
+    }
 }

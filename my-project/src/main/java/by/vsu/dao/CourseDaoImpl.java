@@ -28,4 +28,13 @@ public class CourseDaoImpl implements CourseDao {
             throw new DaoException(ex);
         }
     }
+
+    @Override
+    public List<Course> getCoursesByTeacherId(long teacherId) {
+        try {
+            return courseRepository.getCoursesByTeacherId(teacherId);
+        } catch (Exception ex) {
+            throw new DaoException(ex);
+        }
+    }
 }

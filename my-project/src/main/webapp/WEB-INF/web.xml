@@ -6,12 +6,21 @@
   <display-name>Преподаватели-Курсы</display-name>
 
   <servlet>
-      <servlet-name>TeacherListServlet</servlet-name>
-      <servlet-class>by.vsu.servlets.TeacherListServlet</servlet-class>
+    <servlet-name>TeacherListServlet</servlet-name>
+    <servlet-class>by.vsu.servlets.TeacherListServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-      <servlet-name>TeacherListServlet</servlet-name>
-      <url-pattern>/list-teacher</url-pattern>
+    <servlet-name>TeacherListServlet</servlet-name>
+    <url-pattern>/teachers</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>CourseListServlet</servlet-name>
+    <servlet-class>by.vsu.servlets.CourseListServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CourseListServlet</servlet-name>
+    <url-pattern>/courses</url-pattern>
   </servlet-mapping>
 
 </web-app>

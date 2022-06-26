@@ -28,4 +28,13 @@ public class CourseServiceImpl implements CourseService {
             throw new ServiceException(ex);
         }
     }
+
+    @Override
+    public List<Course> getCoursesByTeacherId(long teacherId) {
+        try {
+            return courseDao.getCoursesByTeacherId(teacherId);
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
+        }
+    }
 }

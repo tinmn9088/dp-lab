@@ -9,4 +9,6 @@ public interface CourseDao {
     List<Course> getAllCourses();
 
     Course getCourseById(long id);
+
+    List<Course> getCoursesByTeacherId(long teacherId);
 }
