@@ -21,6 +21,14 @@ public class CourseRepositoryImpl implements CourseRepository {
     private final static String PASSWORD = ConfigProvider.getValue("db.password");
 
     private TeacherRepository teacherRepository;
+
+    static {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (Exception ex) {
+            throw new RepositoryException(ex);
+        }
+    }
     
     @Override
     public List<Course> getAllCourses() {

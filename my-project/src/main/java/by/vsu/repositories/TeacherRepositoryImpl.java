@@ -17,6 +17,14 @@ public class TeacherRepositoryImpl implements TeacherRepository {
     private final static String USER = ConfigProvider.getValue("db.user");
     
     private final static String PASSWORD = ConfigProvider.getValue("db.password");
+
+    static {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (Exception ex) {
+            throw new RepositoryException(ex);
+        }
+    }
     
     @Override
     public List<Teacher> getAllTeachers() {
