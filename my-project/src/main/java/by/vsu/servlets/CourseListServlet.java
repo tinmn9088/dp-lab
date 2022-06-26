@@ -1,14 +1,12 @@
 package by.vsu.servlets;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import by.vsu.models.Course;
 import by.vsu.services.CourseService;
 import by.vsu.util.ServiceProvider;
 
