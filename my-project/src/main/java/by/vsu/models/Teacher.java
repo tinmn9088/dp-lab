@@ -2,9 +2,11 @@ package by.vsu.models;
 
 import java.time.LocalDate;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
+@AllArgsConstructor
 public class Teacher {
 
     private long id;
