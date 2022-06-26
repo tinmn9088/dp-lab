@@ -23,4 +23,22 @@
     <url-pattern>/courses</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+    <servlet-name>EditCourseServlet</servlet-name>
+    <servlet-class>by.vsu.servlets.EditCourseServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditCourseServlet</servlet-name>
+    <url-pattern>/courses/edit</url-pattern>
+  </servlet-mapping>
+
+  <filter>
+    <filter-name>EncodingFilter</filter-name>
+    <filter-class>by.vsu.filters.EncodingFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>EncodingFilter</filter-name>
+    <url-pattern>*</url-pattern>
+  </filter-mapping>
+
 </web-app>
