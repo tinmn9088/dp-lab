@@ -22,8 +22,6 @@ public class EditCourseServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         String id = req.getParameter("id");
-        System.out.println(id);
-        System.out.println(Long.parseLong(id));
         if (id != null) {
             try {
                 Course existingCourse = courseService.getCourseById(Long.parseLong(id));
@@ -39,6 +37,11 @@ public class EditCourseServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         Course newCourse = new Course();
+        String teacher = req.getParameter("teacher");
+        try {
+            newCourse.setTeacher(teacherService.getTeacherById(
+                    Long.parseLong(teacher.substring(0, teacher.indexOf(".")))));
+        } catch (NumberFormatException ignored) {}
         newCourse.setTitle(req.getParameter("title"));
         long id = courseService.addCourse(newCourse); 
         resp.sendRedirect("edit?id=" + id);
