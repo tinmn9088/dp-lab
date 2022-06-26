@@ -111,9 +111,10 @@ public class CourseRepositoryImpl implements CourseRepository {
     }
 
     @Override
-    public void addCourse(Course newCourse) {
+    public long addCourse(Course newCourse) {
         try (Connection con = DriverManager.getConnection(URL, USER, PASSWORD)) {  
-            PreparedStatement stmt = con.prepareStatement("INSERT INTO courses (teacher_id, title, speciality, semester, number_of_students, hours_of_lectures, hours_of_practice, hours_of_lab, exam) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            PreparedStatement stmt = con.prepareStatement("INSERT INTO courses (teacher_id, title, speciality, semester, number_of_students, hours_of_lectures, hours_of_practice, hours_of_lab, exam) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", 
+                    Statement.RETURN_GENERATED_KEYS);
             if (newCourse.getTeacher() != null) {
                 stmt.setLong(1, newCourse.getTeacher().getId());
             } else {
@@ -136,6 +137,9 @@ public class CourseRepositoryImpl implements CourseRepository {
             stmt.setInt(8, newCourse.getHoursOfLaboratoryWork());
             stmt.setBoolean(9, newCourse.isExam());
             stmt.executeUpdate();
+            ResultSet rs = stmt.getGeneratedKeys();
+            rs.next();
+            return rs.getInt(1);
         } catch (Exception e) { 
             throw new RepositoryException(e);
         }  

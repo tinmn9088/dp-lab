@@ -39,9 +39,9 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public void addCourse(Course newCourse) {
+    public long addCourse(Course newCourse) {
         try {
-            courseDao.addCourse(newCourse);
+            return courseDao.addCourse(newCourse);
         } catch (Exception ex) {
             throw new ServiceException(ex);
         }

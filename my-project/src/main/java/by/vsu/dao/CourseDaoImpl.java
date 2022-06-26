@@ -39,9 +39,9 @@ public class CourseDaoImpl implements CourseDao {
     }
 
     @Override
-    public void addCourse(Course newCourse) {
+    public long addCourse(Course newCourse) {
         try {
-            courseRepository.addCourse(newCourse);
+            return courseRepository.addCourse(newCourse);
         } catch (Exception ex) {
             throw new DaoException(ex);
         }
