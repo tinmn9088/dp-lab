@@ -21,7 +21,7 @@ public class TeacherListServlet extends HttpServlet {
             throws ServletException, IOException {
         List<Teacher> teachers = teacherService.getAllTeachers();
         req.setAttribute("teachers", teachers);
-        getServletContext().getRequestDispatcher("/WEB-INF/jsp/teachers.jsp")
+        getServletContext().getRequestDispatcher("/WEB-INF/jsp/teachers/list.jsp")
                 .forward(req, resp);
     }
 }
