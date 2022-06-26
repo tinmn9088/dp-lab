@@ -27,7 +27,7 @@ public class CourseListServlet extends HttpServlet {
         } else {
             req.setAttribute("courses", courseService.getAllCourses());
         }        
-        getServletContext().getRequestDispatcher("/WEB-INF/jsp/courses.jsp")
+        getServletContext().getRequestDispatcher("/WEB-INF/jsp/courses/list.jsp")
                 .forward(req, resp);
     }
 }

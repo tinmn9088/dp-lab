@@ -2,8 +2,10 @@ package by.vsu.repositories;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.sql.Types;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -34,7 +36,7 @@ public class CourseRepositoryImpl implements CourseRepository {
     public List<Course> getAllCourses() {
         List<Course> courses = new LinkedList<>();
         try (Connection con = DriverManager.getConnection(URL, USER, PASSWORD)) {  
-            Statement stmt= con.createStatement();  
+            Statement stmt = con.createStatement();  
             ResultSet rs = stmt.executeQuery("SELECT id, teacher_id, title, speciality, semester, number_of_students, hours_of_lectures, hours_of_practice, hours_of_lab, exam FROM courses");  
             while (rs.next()) {
                 Course course = new Course();
@@ -59,7 +61,7 @@ public class CourseRepositoryImpl implements CourseRepository {
     @Override
     public Course getCourseById(long id) {
         try (Connection con = DriverManager.getConnection(URL, USER, PASSWORD)) {  
-            Statement stmt= con.createStatement();  
+            Statement stmt = con.createStatement();  
             ResultSet rs = stmt.executeQuery("SELECT id, teacher_id, title, speciality, semester, number_of_students, hours_of_lectures, hours_of_practice, hours_of_lab, exam FROM courses");  
             if (rs.next()) {
                 Course course = new Course();
@@ -86,7 +88,7 @@ public class CourseRepositoryImpl implements CourseRepository {
     public List<Course> getCoursesByTeacherId(long teacherId) {
         List<Course> courses = new LinkedList<>();
         try (Connection con = DriverManager.getConnection(URL, USER, PASSWORD)) {  
-            Statement stmt= con.createStatement();  
+            Statement stmt = con.createStatement();  
             ResultSet rs = stmt.executeQuery("SELECT id, teacher_id, title, speciality, semester, number_of_students, hours_of_lectures, hours_of_practice, hours_of_lab, exam FROM courses WHERE teacher_id=" + teacherId);  
             while (rs.next()) {
                 Course course = new Course();
@@ -106,5 +108,36 @@ public class CourseRepositoryImpl implements CourseRepository {
             throw new RepositoryException(e);
         }  
         return courses;
+    }
+
+    @Override
+    public void addCourse(Course newCourse) {
+        try (Connection con = DriverManager.getConnection(URL, USER, PASSWORD)) {  
+            PreparedStatement stmt = con.prepareStatement("INSERT INTO courses (teacher_id, title, speciality, semester, number_of_students, hours_of_lectures, hours_of_practice, hours_of_lab, exam) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            if (newCourse.getTeacher() != null) {
+                stmt.setLong(1, newCourse.getTeacher().getId());
+            } else {
+                stmt.setNull(1, Types.BIGINT);
+            }
+            if (newCourse.getTitle() != null) {
+                stmt.setString(2, newCourse.getTitle());
+            } else {
+                stmt.setNull(2, Types.NVARCHAR);
+            }
+            if (newCourse.getSpeciality() != null) {
+                stmt.setString(3, newCourse.getSpeciality());
+            } else {
+                stmt.setNull(3, Types.NVARCHAR);
+            }
+            stmt.setInt(4, newCourse.getSemester());
+            stmt.setInt(5, newCourse.getNumberOfStudents());
+            stmt.setInt(6, newCourse.getHoursOfLectures());
+            stmt.setInt(7, newCourse.getHoursOfPractice());
+            stmt.setInt(8, newCourse.getHoursOfLaboratoryWork());
+            stmt.setBoolean(9, newCourse.isExam());
+            stmt.executeUpdate();
+        } catch (Exception e) { 
+            throw new RepositoryException(e);
+        }  
     }
 }

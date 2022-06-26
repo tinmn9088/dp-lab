@@ -11,4 +11,6 @@ public interface CourseDao {
     Course getCourseById(long id);
 
     List<Course> getCoursesByTeacherId(long teacherId);
+
+    void addCourse(Course newCourse);
 }

@@ -37,4 +37,13 @@ public class CourseServiceImpl implements CourseService {
             throw new ServiceException(ex);
         }
     }
+
+    @Override
+    public void addCourse(Course newCourse) {
+        try {
+            courseDao.addCourse(newCourse);
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
+        }
+    }
 }

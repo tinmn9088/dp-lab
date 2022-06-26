@@ -11,4 +11,6 @@ public interface CourseService {
     Course getCourseById(long id);
 
     List<Course> getCoursesByTeacherId(long teacherId);
+
+    void addCourse(Course newCourse);
 }
