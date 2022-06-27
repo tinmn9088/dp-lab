@@ -4,7 +4,7 @@ USE `teachers`;
 
 CREATE TABLE `users` (
     `id`          BIGINT         NOT NULL  AUTO_INCREMENT,
-    `login`       NVARCHAR(255),
+    `login`       NVARCHAR(255)  UNIQUE,
     `password`    NVARCHAR(255),
     `roles`       NVARCHAR(255),
     PRIMARY KEY (`id`)
