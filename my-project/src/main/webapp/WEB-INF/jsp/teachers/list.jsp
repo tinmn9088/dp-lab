@@ -13,8 +13,8 @@
     <ul>
       <% List<Teacher> teachers = (List<Teacher>) request.getAttribute("teachers"); %>
       <% for (Teacher t : teachers) { %>
-        <a href="courses?teacherId=<%= t.getId() %>">
-          <li><%= t %></li>
+        <a href="teachers/edit?id=<%= t.getId() %>">
+          <li><%= String.format("%s %s %s, %s", t.getLname(), t.getFname(), t.getPatronymic(), t.getDegree()) %></li>
         </a>
       <% } %>
     </ul>
