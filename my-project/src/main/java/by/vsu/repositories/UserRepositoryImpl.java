@@ -120,7 +120,7 @@ public class UserRepositoryImpl implements UserRepository {
                 for (String role : newUser.getRoles()) {
                     roles += role + ",";
                 }
-                if (roles.length() >= 2) {
+                if (roles.length() >= 2 && roles.endsWith(",")) {
                     roles = roles.substring(0, roles.length() - 2);
                 }
                 stmt.setString(3, roles);

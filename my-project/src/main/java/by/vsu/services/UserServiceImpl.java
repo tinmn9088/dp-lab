@@ -53,6 +53,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void updateUser(User user) {
         try {
+            user.setPassword(CryptoUtil.sha256(user.getPassword()));
             userDao.updateUser(user);
         } catch (Exception ex) {
             throw new ServiceException(ex);
