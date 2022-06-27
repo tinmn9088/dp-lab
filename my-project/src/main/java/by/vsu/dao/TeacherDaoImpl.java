@@ -28,4 +28,31 @@ public class TeacherDaoImpl implements TeacherDao {
             throw new DaoException(ex);
         }
     }
+
+    @Override
+    public long addTeacher(Teacher newTeacher) {
+        try {
+            return teacherRepository.addTeacher(newTeacher);
+        } catch (Exception ex) {
+            throw new DaoException(ex);
+        }
+    }
+
+    @Override
+    public void updateTeacher(Teacher teacher) {
+        try {
+            teacherRepository.updateTeacher(teacher);
+        } catch (Exception ex) {
+            throw new DaoException(ex);
+        }
+    }
+
+    @Override
+    public void deleteTeacher(long id) {
+        try {
+            teacherRepository.deleteTeacher(id);
+        } catch (Exception ex) {
+            throw new DaoException(ex);
+        }
+    }
 }

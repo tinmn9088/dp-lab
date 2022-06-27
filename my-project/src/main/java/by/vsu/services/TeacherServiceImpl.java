@@ -28,4 +28,31 @@ public class TeacherServiceImpl implements TeacherService {
             throw new ServiceException(ex);
         }
     }
+
+    @Override
+    public long addTeacher(Teacher newTeacher) {
+        try {
+            return teacherDao.addTeacher(newTeacher);
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
+        }
+    }
+
+    @Override
+    public void updateTeacher(Teacher teacher) {
+        try {
+            teacherDao.updateTeacher(teacher);
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
+        }
+    }
+
+    @Override
+    public void deleteTeacher(long id) {
+        try {
+            teacherDao.deleteTeacher(id);
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
+        }
+    }
 }
