@@ -9,9 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import by.vsu.models.Course;
 import by.vsu.models.Teacher;
-import by.vsu.services.CourseService;
 import by.vsu.services.TeacherService;
 import by.vsu.util.ServiceProvider;
 
