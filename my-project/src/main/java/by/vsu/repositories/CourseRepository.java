@@ -13,4 +13,6 @@ public interface CourseRepository {
     List<Course> getCoursesByTeacherId(long teacherId);
 
     long addCourse(Course newCourse);
+
+    void updateCourse(Course course);
 }

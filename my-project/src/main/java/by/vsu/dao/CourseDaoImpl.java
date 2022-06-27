@@ -46,4 +46,13 @@ public class CourseDaoImpl implements CourseDao {
             throw new DaoException(ex);
         }
     }
+
+    @Override
+    public void updateCourse(Course course) {
+        try {
+            courseRepository.updateCourse(course);
+        } catch (Exception ex) {
+            throw new DaoException(ex);
+        }
+    }
 }

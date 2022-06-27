@@ -144,4 +144,36 @@ public class CourseRepositoryImpl implements CourseRepository {
             throw new RepositoryException(e);
         }  
     }
+
+    @Override
+    public void updateCourse(Course course) {
+        try (Connection con = DriverManager.getConnection(URL, USER, PASSWORD)) {  
+            PreparedStatement stmt = con.prepareStatement("UPDATE courses SET teacher_id = ?, title = ?, speciality = ?, semester = ?, number_of_students = ?, hours_of_lectures = ?, hours_of_practice = ?, hours_of_lab = ?, exam = ? WHERE id = ?");
+            if (course.getTeacher() != null) {
+                stmt.setLong(1, course.getTeacher().getId());
+            } else {
+                stmt.setNull(1, Types.BIGINT);
+            }
+            if (course.getTitle() != null) {
+                stmt.setString(2, course.getTitle());
+            } else {
+                stmt.setNull(2, Types.NVARCHAR);
+            }
+            if (course.getSpeciality() != null) {
+                stmt.setString(3, course.getSpeciality());
+            } else {
+                stmt.setNull(3, Types.NVARCHAR);
+            }
+            stmt.setInt(4, course.getSemester());
+            stmt.setInt(5, course.getNumberOfStudents());
+            stmt.setInt(6, course.getHoursOfLectures());
+            stmt.setInt(7, course.getHoursOfPractice());
+            stmt.setInt(8, course.getHoursOfLaboratoryWork());
+            stmt.setBoolean(9, course.isExam());
+            stmt.setLong(10, course.getId());
+            stmt.executeUpdate();
+        } catch (Exception e) { 
+            throw new RepositoryException(e);
+        }  
+    }
 }
