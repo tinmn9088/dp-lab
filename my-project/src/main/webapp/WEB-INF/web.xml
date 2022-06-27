@@ -24,6 +24,15 @@
   </servlet-mapping>
 
   <servlet>
+    <servlet-name>DeleteTeacherServlet</servlet-name>
+    <servlet-class>by.vsu.servlets.DeleteTeacherServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteTeacherServlet</servlet-name>
+    <url-pattern>/teachers/delete</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
     <servlet-name>CourseListServlet</servlet-name>
     <servlet-class>by.vsu.servlets.CourseListServlet</servlet-class>
   </servlet>

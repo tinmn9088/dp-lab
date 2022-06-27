@@ -173,7 +173,11 @@ public class TeacherRepositoryImpl implements TeacherRepository {
 
     @Override
     public void deleteTeacher(long id) {
-        // TODO Auto-generated method stub
-        
+        try (Connection con = DriverManager.getConnection(URL, USER, PASSWORD)) {  
+            Statement stmt = con.createStatement();  
+            stmt.executeUpdate("DELETE FROM teachers WHERE id = " + id);  
+        } catch (Exception e) { 
+            throw new RepositoryException(e);
+        }  
     }
 }
