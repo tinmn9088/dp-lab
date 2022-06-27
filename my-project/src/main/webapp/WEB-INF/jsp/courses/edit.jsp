@@ -89,6 +89,7 @@
       <br>
 
       <button type="submit"><%= course != null ? "Сохранить" : "Создать" %></button>
+      <%= course != null ? "<a href='../courses/delete?id=" + course.getId() + "'><button type='button'>Удалить</button></a>" : "" %>
       <br>
       <br>
     </form>

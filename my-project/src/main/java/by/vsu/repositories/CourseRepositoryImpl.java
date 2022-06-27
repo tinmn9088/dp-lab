@@ -178,4 +178,14 @@ public class CourseRepositoryImpl implements CourseRepository {
             throw new RepositoryException(e);
         }  
     }
+
+    @Override
+    public void deleteCourse(long id) {
+        try (Connection con = DriverManager.getConnection(URL, USER, PASSWORD)) {  
+            Statement stmt = con.createStatement();  
+            stmt.executeUpdate("DELETE FROM courses WHERE id=" + id);  
+        } catch (Exception e) { 
+            throw new RepositoryException(e);
+        }  
+    }
 }

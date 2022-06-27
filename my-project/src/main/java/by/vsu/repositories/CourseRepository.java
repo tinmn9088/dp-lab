@@ -15,4 +15,6 @@ public interface CourseRepository {
     long addCourse(Course newCourse);
 
     void updateCourse(Course course);
+
+    void deleteCourse(long id);
 }

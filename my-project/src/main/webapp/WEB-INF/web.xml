@@ -32,6 +32,15 @@
     <url-pattern>/courses/edit</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+    <servlet-name>DeleteCourseServlet</servlet-name>
+    <servlet-class>by.vsu.servlets.DeleteCourseServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteCourseServlet</servlet-name>
+    <url-pattern>/courses/delete</url-pattern>
+  </servlet-mapping>
+
   <filter>
     <filter-name>EncodingFilter</filter-name>
     <filter-class>by.vsu.filters.EncodingFilter</filter-class>

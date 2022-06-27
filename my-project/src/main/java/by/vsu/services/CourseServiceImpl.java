@@ -55,4 +55,13 @@ public class CourseServiceImpl implements CourseService {
             throw new ServiceException(ex);
         }
     }
+
+    @Override
+    public void deleteCourse(long id) {
+        try {
+            courseDao.deleteCourse(id);
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
+        }
+    }
 }

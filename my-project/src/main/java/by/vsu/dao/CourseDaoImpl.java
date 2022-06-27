@@ -55,4 +55,13 @@ public class CourseDaoImpl implements CourseDao {
             throw new DaoException(ex);
         }
     }
+
+    @Override
+    public void deleteCourse(long id) {
+        try {
+            courseRepository.deleteCourse(id);
+        } catch (Exception ex) {
+            throw new DaoException(ex);
+        }
+    }
 }
