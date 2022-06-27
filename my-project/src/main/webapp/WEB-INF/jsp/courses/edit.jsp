@@ -22,6 +22,7 @@
         <input type="text" name="title" value="<%= (course != null && course.getTitle() != null) ? course.getTitle() : new String() %>">
       </label>
       <br>
+      <br>
 
       <label>Учитель
         <select name="teacher">
@@ -37,48 +38,59 @@
         </select>
       </label>
       <br>
+      <br>
 
       <label>Специальность
         <input type="text" name="speciality" value="<%= (course != null && course.getSpeciality() != null) ? course.getSpeciality() : new String() %>">
       </label>
+      <br>
       <br>
 
       <label>Семестр
         <input type="number" name="semester" min="1" value="<%= course != null ? course.getSemester() : 1 %>">
       </label>
       <br>
+      <br>
 
       <label>Кол-во студентов
         <input type="number" name="numberOfStudents" min="0" value="<%= course != null ? course.getNumberOfStudents() : 0 %>">
       </label>
+      <br>
       <br>
 
       <label>Лекц. часов
         <input type="number" name="hoursOfLectures" min="0" value="<%= course != null ? course.getHoursOfLectures() : 0 %>">
       </label>
       <br>
+      <br>
 
       <label>Практ. часов
         <input type="number" name="hoursOfPractice" min="0" value="<%= course != null ? course.getHoursOfPractice() : 0 %>">
       </label>
+      <br>
       <br>
 
       <label>Лаб. часов
         <input type="number" name="hoursOfLab" min="0" value="<%= course != null ? course.getHoursOfLaboratoryWork() : 0 %>">
       </label>
       <br>
+      <br>
 
       <label>Экзамен
         <input type="checkbox" name="exam" <%= (course != null && course.isExam()) ? "checked" : "" %>>
       </label>
+      <br>
       <br>
 
       <label>Контр. работ
         <input type="number" name="numberOfTests" min="0" value="<%= course != null ? course.getNumberOfTests() : 0 %>">
       </label>
       <br>
+      <br>
 
       <button type="submit"><%= course != null ? "Сохранить" : "Создать" %></button>
+      <br>
+      <br>
     </form>
 
     <a href="../courses"><button>Все курсы</button></a>
