@@ -38,11 +38,33 @@ public class EditCourseServlet extends HttpServlet {
             throws ServletException, IOException {
         Course newCourse = new Course();
         String teacher = req.getParameter("teacher");
-        try {
-            newCourse.setTeacher(teacherService.getTeacherById(
-                    Long.parseLong(teacher.substring(0, teacher.indexOf(".")))));
-        } catch (NumberFormatException ignored) {}
+        if (teacher != null) {
+            try {
+                newCourse.setTeacher(teacherService.getTeacherById(
+                        Long.parseLong(teacher.substring(0, teacher.indexOf(".")))));
+            } catch (NumberFormatException ignored) {}
+        }
         newCourse.setTitle(req.getParameter("title"));
+        newCourse.setSpeciality(req.getParameter("speciality"));
+        try {
+            newCourse.setSemester(Integer.parseInt(req.getParameter("semester")));
+        } catch (NumberFormatException ignored) {}
+        try {
+            newCourse.setNumberOfStudents(Integer.parseInt(req.getParameter("numberOfStudents")));
+        } catch (NumberFormatException ignored) {}
+        try {
+            newCourse.setHoursOfLectures(Integer.parseInt(req.getParameter("hoursOfLectures")));
+        } catch (NumberFormatException ignored) {}
+        try {
+            newCourse.setHoursOfPractice(Integer.parseInt(req.getParameter("hoursOfPractice")));
+        } catch (NumberFormatException ignored) {}
+        try {
+            newCourse.setHoursOfLaboratoryWork(Integer.parseInt(req.getParameter("hoursOfLab")));
+        } catch (NumberFormatException ignored) {}
+        newCourse.setExam(req.getParameter("exam") != null);
+        try {
+            newCourse.setNumberOfTests(Integer.parseInt(req.getParameter("numberOfTests")));
+        } catch (NumberFormatException ignored) {}
         long id = courseService.addCourse(newCourse); 
         resp.sendRedirect("edit?id=" + id);
     }
