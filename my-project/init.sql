@@ -2,6 +2,14 @@ DROP DATABASE IF EXISTS `teachers`;
 CREATE DATABASE `teachers` DEFAULT CHARACTER SET utf8;
 USE `teachers`;
 
+CREATE TABLE `users` (
+    `id`          BIGINT         NOT NULL  AUTO_INCREMENT,
+    `login`       NVARCHAR(255),
+    `password`    NVARCHAR(255),
+    `roles`       NVARCHAR(255),
+    PRIMARY KEY (`id`)
+) ENGINE=INNODB DEFAULT CHARACTER SET utf8;
+
 CREATE TABLE `teachers` (
     `id`          BIGINT         NOT NULL  AUTO_INCREMENT,
     `fname`       NVARCHAR(255),
