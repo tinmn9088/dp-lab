@@ -172,6 +172,8 @@ public class CourseRepositoryImpl implements CourseRepository {
             stmt.setBoolean(9, course.isExam());
             stmt.setLong(10, course.getId());
             stmt.executeUpdate();
+            System.out.println(stmt);
+            System.out.println(course);
         } catch (Exception e) { 
             throw new RepositoryException(e);
         }  
