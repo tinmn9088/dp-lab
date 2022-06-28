@@ -86,7 +86,8 @@ public class UserServiceImpl implements UserService {
     }
 
     private void validateUpdateUser(User user) {
-        if (userDao.getUserByLogin(user.getLogin()).getId() != user.getId()) {
+        User existingUser = userDao.getUserByLogin(user.getLogin());
+        if (existingUser != null && existingUser.getId() != user.getId()) {
             throw new ServiceException("User \"" + user.getLogin() + "\" exists");
         }
     }

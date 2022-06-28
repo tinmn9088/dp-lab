@@ -6,6 +6,7 @@
 <%
     Course course = (Course) request.getAttribute("course");
     List<Teacher> teachers = (List<Teacher>) request.getAttribute("teachers");
+    String url = request.getContextPath();
 %>
 
 <!DOCTYPE html>
@@ -89,12 +90,12 @@
       <br>
 
       <button type="submit"><%= course != null ? "Сохранить" : "Создать" %></button>
-      <%= course != null ? "<a href='../courses/delete?id=" + course.getId() + "'><button type='button'>Удалить</button></a>" : "" %>
+      <%= course != null ? "<a href='" + url + "/courses/delete?id=" + course.getId() + "'><button type='button'>Удалить</button></a>" : "" %>
       <br>
       <br>
     </form>
 
-    <a href="../courses"><button>Все курсы</button></a>
+    <a href="<%= url %>/courses"><button>Все курсы</button></a>
 
   </body>
 </html>

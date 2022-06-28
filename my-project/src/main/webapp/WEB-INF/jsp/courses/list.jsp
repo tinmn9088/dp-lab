@@ -2,6 +2,11 @@
 <%@taglib tagdir="/WEB-INF/tags" prefix="u" %>
 <%@ page import="java.util.List" %>
 <%@ page import="by.vsu.models.Course" %>
+
+<%
+  String url = request.getContextPath();
+%>
+
 <!DOCTYPE html>
 <html>
   <meta charset="utf-8">
@@ -14,7 +19,7 @@
 
     <h1>Список курсов</h1>
 
-    <a href="courses/edit"><button>Создать курс</button></a>
+    <a href="<%= url %>/courses/edit"><button>Создать курс</button></a>
 
     <% List<Course> courses = (List<Course>) request.getAttribute("courses"); %>
     <table class="table_sort">
@@ -30,7 +35,7 @@
       <tbody>
         <% for (Course c : courses) { %>
           <tr>
-            <td><a href="courses/edit?id=<%= c.getId() %>"><%= c.getTitle() %></a></td>
+            <td><a href="<%= url %>/courses/edit?id=<%= c.getId() %>"><%= c.getTitle() %></a></td>
             <td><%= (c.getTeacher() != null) ? String.format("%s %s %s", c.getTeacher().getLname(), c.getTeacher().getFname(), c.getTeacher().getPatronymic()) : "-" %></td>
             <td><%= c.getCourse() %></td>
             <td><%= c.getSemester() %></td>

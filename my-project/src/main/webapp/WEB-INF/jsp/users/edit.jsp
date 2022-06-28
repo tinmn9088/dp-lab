@@ -4,6 +4,7 @@
 
 <%
     User user = (User) request.getAttribute("user");
+    String url = request.getContextPath();
 %>
 
 <!DOCTYPE html>
@@ -35,12 +36,12 @@
       <br>
 
       <button type="submit"><%= user!= null ? "Сохранить" : "Создать" %></button>
-      <%= user != null ? "<a href='../users/delete?id=" + user.getId() + "'><button type='button'>Удалить</button></a>" : "" %>
+      <%= user != null ? "<a href='" + url + "/users/delete?id=" + user.getId() + "'><button type='button'>Удалить</button></a>" : "" %>
       <br>
       <br>
     </form>
 
-    <a href="../users"><button>Все пользователи</button></a>
+    <a href="<%= url %>/users"><button>Все пользователи</button></a>
 
   </body>
 </html>

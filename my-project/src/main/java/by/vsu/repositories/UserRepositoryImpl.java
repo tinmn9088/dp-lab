@@ -162,8 +162,6 @@ public class UserRepositoryImpl implements UserRepository {
                 } else {
                     stmt.setNull(1, Types.NVARCHAR);
                 }
-
-                System.out.println(user);
                 
                 stmt.setString(2, user.getPassword());
                 if (user.getRoles() != null) {

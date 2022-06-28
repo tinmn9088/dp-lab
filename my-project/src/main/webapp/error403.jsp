@@ -1,6 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib tagdir="/WEB-INF/tags" prefix="u" %>
 
+<%
+  String url = request.getContextPath();
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,6 +17,6 @@
 
     <h1>Доступ запрещен</h1>
 
-    <a href="login"><button>Войти</button></a>
+    <a href="<%= url %>/login"><button>Войти</button></a>
 </body>
 </html>
