@@ -35,7 +35,7 @@
       <br>
 
       <button type="submit"><%= user!= null ? "Сохранить" : "Создать" %></button>
-      <%= user != null ? "<a href='../user/delete?id=" + user.getId() + "'><button type='button'>Удалить</button></a>" : "" %>
+      <%= user != null ? "<a href='../users/delete?id=" + user.getId() + "'><button type='button'>Удалить</button></a>" : "" %>
       <br>
       <br>
     </form>
