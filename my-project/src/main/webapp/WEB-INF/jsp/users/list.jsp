@@ -13,6 +13,8 @@
 
     <h1>Список пользователей</h1>
 
+    <a href="users/edit"><button>Добавить пользователя</button></a>
+
     <ul>
       <% List<User> users = (List<User>) request.getAttribute("users"); %>
       <% for (User u : users) { %>

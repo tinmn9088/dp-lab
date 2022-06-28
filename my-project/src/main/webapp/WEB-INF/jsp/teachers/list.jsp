@@ -13,6 +13,8 @@
 
     <h1>Список преподавателей</h1>
 
+    <a href="teachers/edit"><button>Добавить преподавателя</button></a>
+
     <ul>
       <% List<Teacher> teachers = (List<Teacher>) request.getAttribute("teachers"); %>
       <% for (Teacher t : teachers) { %>

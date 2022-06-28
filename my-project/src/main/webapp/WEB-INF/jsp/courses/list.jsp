@@ -13,6 +13,8 @@
 
     <h1>Список курсов</h1>
 
+    <a href="courses/edit"><button>Создать курс</button></a>
+
     <ul>
       <% List<Course> courses = (List<Course>) request.getAttribute("courses"); %>
       <% for (Course c : courses) { %>
