@@ -8,6 +8,8 @@ import by.vsu.models.User;
 import by.vsu.util.CryptoUtil;
 import lombok.AllArgsConstructor;
 
+import static java.util.Objects.requireNonNull;
+
 @AllArgsConstructor
 public class UserServiceImpl implements UserService {
 
@@ -44,6 +46,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public long addUser(User newUser) {
         try {
+            validateAddUser(newUser);
             newUser.setPassword(CryptoUtil.sha256(newUser.getPassword()));
             newUser.setRoles(newUser.getRoles().stream().map(String::toLowerCase).collect(Collectors.toSet()));
             return userDao.addUser(newUser);
@@ -55,6 +58,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void updateUser(User user) {
         try {
+            validateUpdateUser(user);
             user.setPassword(CryptoUtil.sha256(user.getPassword()));
             user.setRoles(user.getRoles().stream().map(String::toLowerCase).collect(Collectors.toSet()));
             userDao.updateUser(user);
@@ -70,5 +74,17 @@ public class UserServiceImpl implements UserService {
         } catch (Exception ex) {
             throw new ServiceException(ex);
         }  
+    }
+
+    private void validateAddUser(User newUser) {
+        requireNonNull(newUser.getLogin());
+        if (userDao.getUserByLogin(newUser.getLogin()) != null) {
+            throw new ServiceException("User \"" + newUser.getLogin() + "\" exists");
+        }
+        requireNonNull(newUser.getPassword());
+        requireNonNull(newUser.getRoles());
+    }
+
+    private void validateUpdateUser(User user) {
     }
 }

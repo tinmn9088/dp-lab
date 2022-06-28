@@ -10,6 +10,8 @@ public interface UserRepository {
 
     User getUserById(long id);
 
+    User getUserByLogin(String login);
+
     User getUserByLoginPassword(String login, String password);
 
     long addUser(User newUser);

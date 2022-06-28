@@ -30,6 +30,15 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    public User getUserByLogin(String login) {
+        try {
+            return userRepository.getUserByLogin(login);
+        } catch (Exception ex) {
+            throw new DaoException(ex);
+        }
+    }
+
+    @Override
     public User getUserByLoginPassword(String login, String password) {
         try {
             return userRepository.getUserByLoginPassword(login, password);

@@ -7,6 +7,9 @@ import java.security.NoSuchAlgorithmException;
 public class CryptoUtil {
     
     public static String sha256(String str) {
+        if (str == null || str.isBlank()) {
+            return str;
+        }
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             byte[] encodedhash = digest.digest(str.getBytes(StandardCharsets.UTF_8));

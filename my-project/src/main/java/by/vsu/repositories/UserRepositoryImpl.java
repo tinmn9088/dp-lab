@@ -77,10 +77,33 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
+    public User getUserByLogin(String login) {
+        try (Connection con = DriverManager.getConnection(URL, USER, PASSWORD)) {  
+            Statement stmt= con.createStatement();  
+            ResultSet rs = stmt.executeQuery("SELECT id, login, password, roles FROM users WHERE login = '" + login + "'");  
+            if (rs.next()) {
+                User user = new User();
+                user.setId(rs.getLong(1));
+                user.setLogin(rs.getString(2));
+                user.setPassword(rs.getString(3));
+                if (rs.getString(4) != null) {
+                    Set<String> roles = new HashSet<>(List.of(rs.getString(4).split(",")));
+                    user.setRoles(roles);
+                }
+                return user;
+            } else {
+                return null;
+            }
+        } catch (Exception e) { 
+            throw new RepositoryException(e);
+        }
+    }
+
+    @Override
     public User getUserByLoginPassword(String login, String password) {
         try (Connection con = DriverManager.getConnection(URL, USER, PASSWORD)) {  
             Statement stmt= con.createStatement();  
-            ResultSet rs = stmt.executeQuery("SELECT id, login, password, roles FROM users WHERE login='" 
+            ResultSet rs = stmt.executeQuery("SELECT id, login, password, roles FROM users WHERE login = '" 
                     + login + "' AND password='" + password + "'");  
             if (rs.next()) {
                 User user = new User();
@@ -132,23 +155,37 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public void updateUser(User user) {
         try (Connection con = DriverManager.getConnection(URL, USER, PASSWORD)) {  
-            PreparedStatement stmt = con.prepareStatement("UPDATE users SET login = ?, password = ?, roles = ? WHERE id = " + user.getId());
-            if (user.getLogin() != null) {
-                stmt.setString(1, user.getLogin());
-            } else {
-                stmt.setNull(1, Types.NVARCHAR);
-            }
-            if (user.getPassword() != null) {
+            if (user.getPassword() != null && !user.getPassword().isBlank()) {
+                PreparedStatement stmt = con.prepareStatement("UPDATE users SET login = ?, password = ?, roles = ? WHERE id = '" + user.getId() + "'");
+                if (user.getLogin() != null) {
+                    stmt.setString(1, user.getLogin());
+                } else {
+                    stmt.setNull(1, Types.NVARCHAR);
+                }
+
+                System.out.println(user);
+                
                 stmt.setString(2, user.getPassword());
+                if (user.getRoles() != null) {
+                    stmt.setString(3, String.join(",", user.getRoles()));
+                } else {
+                    stmt.setNull(3, Types.NVARCHAR);
+                }
+                stmt.executeUpdate();
             } else {
-                stmt.setNull(2, Types.NVARCHAR);
+                PreparedStatement stmt = con.prepareStatement("UPDATE users SET login = ?, roles = ? WHERE id = '" + user.getId() + "'");
+                if (user.getLogin() != null) {
+                    stmt.setString(1, user.getLogin());
+                } else {
+                    stmt.setNull(1, Types.NVARCHAR);
+                }
+                if (user.getRoles() != null) {
+                    stmt.setString(2, String.join(",", user.getRoles()));
+                } else {
+                    stmt.setNull(2, Types.NVARCHAR);
+                }
+                stmt.executeUpdate();
             }
-            if (user.getRoles() != null) {
-                stmt.setString(3, String.join(",", user.getRoles()));
-            } else {
-                stmt.setNull(3, Types.NVARCHAR);
-            }
-            stmt.executeUpdate();
         } catch (Exception e) { 
             throw new RepositoryException(e);
         }

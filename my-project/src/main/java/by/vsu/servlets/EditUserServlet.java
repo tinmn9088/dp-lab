@@ -49,7 +49,7 @@ public class EditUserServlet extends HttpServlet {
         } else {
             try {
                 user.setId(Long.parseLong(req.getParameter("id")));
-                userService.updateUser(user); 
+                userService.updateUser(user);
                 resp.sendRedirect("edit?id=" + req.getParameter("id"));
             } catch (NumberFormatException ignored) {}
         }

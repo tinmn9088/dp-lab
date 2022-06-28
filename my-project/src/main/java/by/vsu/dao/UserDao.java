@@ -10,6 +10,8 @@ public interface UserDao {
 
     User getUserById(long id);
 
+    User getUserByLogin(String login);
+
     long addUser(User newUser);
 
     User getUserByLoginPassword(String login, String password);
