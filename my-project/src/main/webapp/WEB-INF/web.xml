@@ -15,6 +15,15 @@
   </servlet-mapping>
 
   <servlet>
+    <servlet-name>EditUserServlet</servlet-name>
+    <servlet-class>by.vsu.servlets.EditUserServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditUserServlet</servlet-name>
+    <url-pattern>/users/edit</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
     <servlet-name>TeacherListServlet</servlet-name>
     <servlet-class>by.vsu.servlets.TeacherListServlet</servlet-class>
   </servlet>

@@ -116,14 +116,7 @@ public class UserRepositoryImpl implements UserRepository {
                 stmt.setNull(2, Types.NVARCHAR);
             }
             if (newUser.getRoles() != null) {
-                String roles = "";
-                for (String role : newUser.getRoles()) {
-                    roles += role + ",";
-                }
-                if (roles.length() >= 2 && roles.endsWith(",")) {
-                    roles = roles.substring(0, roles.length() - 2);
-                }
-                stmt.setString(3, roles);
+                stmt.setString(3, String.join(",", newUser.getRoles()));
             } else {
                 stmt.setNull(3, Types.NVARCHAR);
             }
@@ -151,14 +144,7 @@ public class UserRepositoryImpl implements UserRepository {
                 stmt.setNull(2, Types.NVARCHAR);
             }
             if (user.getRoles() != null) {
-                String roles = "";
-                for (String role : user.getRoles()) {
-                    roles += role + ",";
-                }
-                if (roles.length() >= 2) {
-                    roles = roles.substring(0, roles.length() - 2);
-                }
-                stmt.setString(3, roles);
+                stmt.setString(3, String.join(",", user.getRoles()));
             } else {
                 stmt.setNull(3, Types.NVARCHAR);
             }

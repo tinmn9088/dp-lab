@@ -1,6 +1,7 @@
 package by.vsu.services;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import by.vsu.dao.UserDao;
 import by.vsu.models.User;
@@ -44,6 +45,7 @@ public class UserServiceImpl implements UserService {
     public long addUser(User newUser) {
         try {
             newUser.setPassword(CryptoUtil.sha256(newUser.getPassword()));
+            newUser.setRoles(newUser.getRoles().stream().map(String::toLowerCase).collect(Collectors.toSet()));
             return userDao.addUser(newUser);
         } catch (Exception ex) {
             throw new ServiceException(ex);
@@ -54,6 +56,7 @@ public class UserServiceImpl implements UserService {
     public void updateUser(User user) {
         try {
             user.setPassword(CryptoUtil.sha256(user.getPassword()));
+            user.setRoles(user.getRoles().stream().map(String::toLowerCase).collect(Collectors.toSet()));
             userDao.updateUser(user);
         } catch (Exception ex) {
             throw new ServiceException(ex);
