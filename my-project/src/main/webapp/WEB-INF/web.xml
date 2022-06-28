@@ -133,4 +133,9 @@
     <url-pattern>/users/*</url-pattern>
   </filter-mapping>
 
+  <error-page>
+    <error-code>403</error-code>
+    <location>/error403.jsp</location>
+  </error-page>
+
 </web-app>
