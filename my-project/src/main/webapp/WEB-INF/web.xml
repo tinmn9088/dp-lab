@@ -15,6 +15,15 @@
   </servlet-mapping>
 
   <servlet>
+    <servlet-name>LogoutServlet</servlet-name>
+    <servlet-class>by.vsu.servlets.LogoutServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LogoutServlet</servlet-name>
+    <url-pattern>/logout</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
     <servlet-name>UserListServlet</servlet-name>
     <servlet-class>by.vsu.servlets.UserListServlet</servlet-class>
   </servlet>
