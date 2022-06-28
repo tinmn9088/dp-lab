@@ -78,13 +78,16 @@ public class UserServiceImpl implements UserService {
 
     private void validateAddUser(User newUser) {
         requireNonNull(newUser.getLogin());
+        requireNonNull(newUser.getPassword());
+        requireNonNull(newUser.getRoles());
         if (userDao.getUserByLogin(newUser.getLogin()) != null) {
             throw new ServiceException("User \"" + newUser.getLogin() + "\" exists");
         }
-        requireNonNull(newUser.getPassword());
-        requireNonNull(newUser.getRoles());
     }
 
     private void validateUpdateUser(User user) {
+        if (userDao.getUserByLogin(user.getLogin()).getId() != user.getId()) {
+            throw new ServiceException("User \"" + user.getLogin() + "\" exists");
+        }
     }
 }
