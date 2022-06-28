@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib tagdir="/WEB-INF/tags" prefix="u" %>
 <%@ page import="java.util.List" %>
 <%@ page import="by.vsu.models.User" %>
 <!DOCTYPE html>
@@ -8,6 +9,8 @@
     <title>Список пользователей</title>
   </head>
   <body>
+    <u:header></u:header>
+
     <h1>Список пользователей</h1>
 
     <ul>
