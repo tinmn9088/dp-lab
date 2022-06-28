@@ -2,7 +2,6 @@ package by.vsu.servlets;
 
 import java.io.IOException;
 import java.net.URLEncoder;
-import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
