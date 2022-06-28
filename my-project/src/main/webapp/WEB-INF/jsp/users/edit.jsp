@@ -18,7 +18,7 @@
 
     <form method="post">
       <label>Логин
-        <input type="text" name="login" value="<%= (user != null && user.getLogin() != null) ? user.getLogin() : new String() %>">
+        <input type="text" name="login" value="<%= (user != null && user.getLogin() != null) ? user.getLogin() : new String() %>" required>
       </label>
       <br>
       <br>

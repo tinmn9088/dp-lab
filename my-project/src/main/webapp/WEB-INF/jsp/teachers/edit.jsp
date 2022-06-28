@@ -18,19 +18,19 @@
 
     <form method="post">
       <label>Имя
-        <input type="text" name="fname" value="<%= (teacher != null && teacher.getFname() != null) ? teacher.getFname() : new String() %>">
+        <input type="text" name="fname" value="<%= (teacher != null && teacher.getFname() != null) ? teacher.getFname() : new String() %>" required>
       </label>
       <br>
       <br>
 
       <label>Фамилия
-        <input type="text" name="lname" value="<%= (teacher != null && teacher.getLname() != null) ? teacher.getLname() : new String() %>">
+        <input type="text" name="lname" value="<%= (teacher != null && teacher.getLname() != null) ? teacher.getLname() : new String() %>" required>
       </label>
       <br>
       <br>
 
       <label>Отчество
-        <input type="text" name="patronymic" value="<%= (teacher != null && teacher.getPatronymic() != null) ? teacher.getPatronymic() : new String() %>">
+        <input type="text" name="patronymic" value="<%= (teacher != null && teacher.getPatronymic() != null) ? teacher.getPatronymic() : new String() %>" required>
       </label>
       <br>
       <br>

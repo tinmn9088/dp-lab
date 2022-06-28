@@ -20,7 +20,7 @@
 
     <form method="post">
       <label>Название
-        <input type="text" name="title" value="<%= (course != null && course.getTitle() != null) ? course.getTitle() : new String() %>">
+        <input type="text" name="title" value="<%= (course != null && course.getTitle() != null) ? course.getTitle() : new String() %>" required>
       </label>
       <br>
       <br>
