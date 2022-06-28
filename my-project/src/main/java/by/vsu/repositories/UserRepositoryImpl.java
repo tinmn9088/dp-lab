@@ -57,7 +57,7 @@ public class UserRepositoryImpl implements UserRepository {
     public User getUserById(long id) {
         try (Connection con = DriverManager.getConnection(URL, USER, PASSWORD)) {  
             Statement stmt= con.createStatement();  
-            ResultSet rs = stmt.executeQuery("SELECT id, login, password, roles FROM users WHERE id = " + id);  
+            ResultSet rs = stmt.executeQuery("SELECT id, login, password, roles FROM users WHERE id = '" + id + "'");  
             if (rs.next()) {
                 User user = new User();
                 user.setId(rs.getLong(1));
@@ -80,8 +80,8 @@ public class UserRepositoryImpl implements UserRepository {
     public User getUserByLoginPassword(String login, String password) {
         try (Connection con = DriverManager.getConnection(URL, USER, PASSWORD)) {  
             Statement stmt= con.createStatement();  
-            ResultSet rs = stmt.executeQuery("SELECT id, login, password, roles FROM users WHERE login = " 
-                    + login + " AND password = " + password);  
+            ResultSet rs = stmt.executeQuery("SELECT id, login, password, roles FROM users WHERE login='" 
+                    + login + "' AND password='" + password + "'");  
             if (rs.next()) {
                 User user = new User();
                 user.setId(rs.getLong(1));
@@ -158,7 +158,7 @@ public class UserRepositoryImpl implements UserRepository {
     public void deleteUser(long id) {
         try (Connection con = DriverManager.getConnection(URL, USER, PASSWORD)) {  
             Statement stmt = con.createStatement();  
-            stmt.executeUpdate("DELETE FROM users WHERE id = " + id);  
+            stmt.executeUpdate("DELETE FROM users WHERE id = '" + id + "'");  
         } catch (Exception e) { 
             throw new RepositoryException(e);
         } 

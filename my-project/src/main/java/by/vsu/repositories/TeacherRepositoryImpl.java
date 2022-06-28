@@ -57,7 +57,7 @@ public class TeacherRepositoryImpl implements TeacherRepository {
     public Teacher getTeacherById(long id) {
         try (Connection con = DriverManager.getConnection(URL, USER, PASSWORD)) {  
             Statement stmt= con.createStatement();  
-            ResultSet rs = stmt.executeQuery("SELECT id, lname, fname, patronymic, degree, place, gender, birthdate FROM teachers WHERE id=" + id);  
+            ResultSet rs = stmt.executeQuery("SELECT id, lname, fname, patronymic, degree, place, gender, birthdate FROM teachers WHERE id = '" + id + "'");  
             if (rs.next()) {
                 Teacher teacher = new Teacher();
                 teacher.setId(rs.getLong(1));
@@ -129,7 +129,7 @@ public class TeacherRepositoryImpl implements TeacherRepository {
     @Override
     public void updateTeacher(Teacher teacher) {
         try (Connection con = DriverManager.getConnection(URL, USER, PASSWORD)) {  
-            PreparedStatement stmt = con.prepareStatement("UPDATE teachers SET fname = ?, lname = ?, patronymic = ?, degree = ?, place = ?, gender = ?, birthdate = ? WHERE id = " + teacher.getId());
+            PreparedStatement stmt = con.prepareStatement("UPDATE teachers SET fname = ?, lname = ?, patronymic = ?, degree = ?, place = ?, gender = ?, birthdate = ? WHERE id = '" + teacher.getId() + "'");
             if (teacher.getFname() != null) {
                 stmt.setString(1, teacher.getFname());
             } else {
@@ -175,7 +175,7 @@ public class TeacherRepositoryImpl implements TeacherRepository {
     public void deleteTeacher(long id) {
         try (Connection con = DriverManager.getConnection(URL, USER, PASSWORD)) {  
             Statement stmt = con.createStatement();  
-            stmt.executeUpdate("DELETE FROM teachers WHERE id = " + id);  
+            stmt.executeUpdate("DELETE FROM teachers WHERE id = '" + id + "'");  
         } catch (Exception e) { 
             throw new RepositoryException(e);
         }  

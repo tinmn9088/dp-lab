@@ -62,7 +62,7 @@ public class CourseRepositoryImpl implements CourseRepository {
     public Course getCourseById(long id) {
         try (Connection con = DriverManager.getConnection(URL, USER, PASSWORD)) {  
             Statement stmt = con.createStatement();  
-            ResultSet rs = stmt.executeQuery("SELECT id, teacher_id, title, speciality, semester, number_of_students, hours_of_lectures, hours_of_practice, hours_of_lab, exam FROM courses WHERE id=" + id);  
+            ResultSet rs = stmt.executeQuery("SELECT id, teacher_id, title, speciality, semester, number_of_students, hours_of_lectures, hours_of_practice, hours_of_lab, exam FROM courses WHERE id = '" + id + "'");  
             if (rs.next()) {
                 Course course = new Course();
                 course.setId(rs.getLong(1));
@@ -89,7 +89,7 @@ public class CourseRepositoryImpl implements CourseRepository {
         List<Course> courses = new LinkedList<>();
         try (Connection con = DriverManager.getConnection(URL, USER, PASSWORD)) {  
             Statement stmt = con.createStatement();  
-            ResultSet rs = stmt.executeQuery("SELECT id, teacher_id, title, speciality, semester, number_of_students, hours_of_lectures, hours_of_practice, hours_of_lab, exam FROM courses WHERE teacher_id=" + teacherId);  
+            ResultSet rs = stmt.executeQuery("SELECT id, teacher_id, title, speciality, semester, number_of_students, hours_of_lectures, hours_of_practice, hours_of_lab, exam FROM courses WHERE teacher_id = '" + teacherId + "'");  
             while (rs.next()) {
                 Course course = new Course();
                 course.setId(rs.getLong(1));
@@ -183,7 +183,7 @@ public class CourseRepositoryImpl implements CourseRepository {
     public void deleteCourse(long id) {
         try (Connection con = DriverManager.getConnection(URL, USER, PASSWORD)) {  
             Statement stmt = con.createStatement();  
-            stmt.executeUpdate("DELETE FROM courses WHERE id=" + id);  
+            stmt.executeUpdate("DELETE FROM courses WHERE id = '" + id + "'");  
         } catch (Exception e) { 
             throw new RepositoryException(e);
         }  
