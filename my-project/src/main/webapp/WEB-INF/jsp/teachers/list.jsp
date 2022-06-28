@@ -7,6 +7,7 @@
   <meta charset="utf-8">
   <head>
     <title>Список преподавателей</title>
+    <link href="css/sort-table.css" rel="stylesheet">
   </head>
   <body>
     <u:header></u:header>
@@ -15,14 +16,27 @@
 
     <a href="teachers/edit"><button>Добавить преподавателя</button></a>
 
-    <ul>
-      <% List<Teacher> teachers = (List<Teacher>) request.getAttribute("teachers"); %>
-      <% for (Teacher t : teachers) { %>
-        <a href="teachers/edit?id=<%= t.getId() %>">
-          <li><%= String.format("%s %s %s, %s", t.getLname(), t.getFname(), t.getPatronymic(), t.getDegree()) %></li>
-        </a>
-      <% } %>
-    </ul>
+    <% List<Teacher> teachers = (List<Teacher>) request.getAttribute("teachers"); %>
+    <table class="table_sort">
+      <thead>
+        <tr>
+          <th>ФИО</th>
+          <th>Уч. степень</th>
+          <th>Дата рождения</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for (Teacher t : teachers) { %>
+            <tr>
+              <td><a href="teachers/edit?id=<%= t.getId() %>"><%= String.format("%s %s %s", t.getLname(), t.getFname(), t.getPatronymic()) %></a></td>
+              <td><%= t.getDegree() %></td>
+              <td><%= t.getBirthdate() %></td>
+            </tr>
+          </a>
+        <% } %>
+      </tbody>
+    </table>
 
+      <script src="js/sort-table.js"></script>
   </body>
 </html>
