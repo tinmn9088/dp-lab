@@ -6,6 +6,15 @@
   <display-name>Преподаватели-Курсы</display-name>
 
   <servlet>
+    <servlet-name>LoginServlet</servlet-name>
+    <servlet-class>by.vsu.servlets.LoginServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoginServlet</servlet-name>
+    <url-pattern>/login</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
     <servlet-name>UserListServlet</servlet-name>
     <servlet-class>by.vsu.servlets.UserListServlet</servlet-class>
   </servlet>

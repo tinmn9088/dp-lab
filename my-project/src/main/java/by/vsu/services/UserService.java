@@ -12,7 +12,7 @@ public interface UserService {
 
     long addUser(User newUser);
 
-    boolean validatePassword(String login, String rawPassword);
+    User getUserByLoginPassword(String login, String rawPassword);
 
     void updateUser(User user);
 

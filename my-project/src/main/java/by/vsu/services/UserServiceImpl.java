@@ -32,10 +32,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean validatePassword(String login, String rawPassword) {
+    public User getUserByLoginPassword(String login, String rawPassword) {
         try {
             String password = CryptoUtil.sha256(rawPassword);
-            return userDao.getUserByLoginPassword(login, password) != null;
+            return userDao.getUserByLoginPassword(login, password);
         } catch (Exception ex) {
             throw new ServiceException(ex);
         }
