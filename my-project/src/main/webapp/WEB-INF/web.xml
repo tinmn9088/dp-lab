@@ -113,4 +113,14 @@
     <url-pattern>*</url-pattern>
   </filter-mapping>
 
+  <filter>
+    <filter-name>UserSecurityFilter</filter-name>
+    <filter-class>by.vsu.filters.UserSecurityFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>UserSecurityFilter</filter-name>
+    <url-pattern>/teachers/edit</url-pattern>
+    <url-pattern>/courses/edit</url-pattern>
+  </filter-mapping>
+
 </web-app>
